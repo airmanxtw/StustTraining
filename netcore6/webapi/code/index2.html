@@ -6,8 +6,18 @@
 
     </body>
     <script>
+        // 1.example         
         axios.get("https://portal.stust.edu.tw/langcenterapi/data/stud").then(res=>{
             alert(res.data);
+        });
+
+
+        // 2.auth example
+        axios.get("https://portal.stust.edu.tw/langcenterapi/data/stud/authtest").then(res =>{
+            alert(res.data);
+        })
+        .catch(err =>{
+            alert(`error:${err.response.status}`);
         })
     </script>
 </html>
