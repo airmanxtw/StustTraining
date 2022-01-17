@@ -6,18 +6,14 @@
 
     </body>
     <script>
-        // 1.example         
-        axios.get("https://portal.stust.edu.tw/langcenterapi/data/stud").then(res=>{
-            alert(res.data);
-        });
-
-
-        // 2.auth example
-        axios.get("https://portal.stust.edu.tw/langcenterapi/data/stud/authtest").then(res =>{
-            alert(res.data);
+        axios.post("https://xxxxx.stust.edu.tw/langcenterapi/auth/stud",{userid:'4A5L0088',password:'12345'}).then(res =>{                        
+            axios.get("https://xxxxx.stust.edu.tw/langcenterapi/data/stud/authtest",{headers:{"Authorization":`bearer ${res.data.token}`}}).then(res2 => {
+                debugger;
+            })
         })
-        .catch(err =>{
+        .catch(err => {
             alert(`error:${err.response.status}`);
         })
+
     </script>
 </html>
