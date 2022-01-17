@@ -1,0 +1,13 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    </head>
+    <body>
+
+    </body>
+    <script>
+        axios.get("https://portal.stust.edu.tw/langcenterapi/data/stud").then(res=>{
+            alert(res.data);
+        })
+    </script>
+</html>
