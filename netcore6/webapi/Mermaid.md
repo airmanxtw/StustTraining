@@ -1,8 +1,8 @@
 ``` mermaid
 graph TD
-  A[Hard] -->|Text| B(Round)
-  B --> C{Decision}
-  C -->|One| D[Result 1]
-  C -->|Two| E[Result 2]
+  A(線上教學平台) -->|登入系統| B(系統功能)
+  B --> C(資源學習)
+  B --> D(線上測驗)
+  B --> E(輔導預約)
 ```
 
