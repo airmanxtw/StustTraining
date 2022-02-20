@@ -1,5 +1,5 @@
 ``` mermaid
-graph TD
+graph LR
   A(線上教學平台) -->|登入系統| B(系統功能)
   B --> C(資源學習)
   B --> D(線上測驗)
