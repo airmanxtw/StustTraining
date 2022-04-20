@@ -1,0 +1,25 @@
+<html>
+<header>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</header>
+
+<body>
+    <script>
+        $(document).ready(function () {
+            let timeId = undefined;
+            
+            let wrapper = function (delay, callback) {
+                !!timeId && clearTimeout(timeId);
+                timeId = setTimeout(callback, delay);
+            }
+
+            $("#button").click(() => wrapper(1000, function () {
+                console.log('this is click');
+            }))
+
+        })
+    </script>
+    <input id="button" type="button" value="click me" />
+</body>
+
+</html>
