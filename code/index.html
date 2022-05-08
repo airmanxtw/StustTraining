@@ -5,7 +5,12 @@
 </head>
 
 <body>
-    <svelte-title></svelte-title>
+
+    <div>v2</div>
+    <svelte-title id="svelte-title"></svelte-title>
+    <script>
+        document.querySelector('#svelte-title').$on('add2', (e) => { console.log(e) })
+    </script>
 </body>
 
 </html>
