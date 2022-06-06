@@ -7,7 +7,7 @@
 
 <body>
     <script>
-        Fingerprint2.get(function (components) {
+        Fingerprint2.get({canvas: true},function (components) {
             const values = components.map(component => component.value)
             let finger=Fingerprint2.x64hash128(values.join(""), 31);  
             alert(`finger=${finger}`);            
