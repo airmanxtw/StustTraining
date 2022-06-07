@@ -1,0 +1,45 @@
+<html>
+
+<head></head>
+
+<body>
+    <script>
+
+        let v0 = "this is v0";
+        const obj1 = {
+            v1: "this is v1",
+            fun1: async () => {
+                return "this is func1";
+            }
+        }
+
+        obj1.fun1().then(function(res){
+            console.log(res);
+            console.log(v0);
+        })
+
+        // const fun1 = () => {
+        //     return new Promise((resolve, reject) => {
+        //         resolve('hello this is func1x');
+        //     })
+        // }
+
+        // const fun2 = async () => {
+        //     return `no this is fun2`;
+        // }
+
+
+        // let v1 = "this is v1";
+
+        // fun1().then(function (res) {
+        //     console.log(res);
+        //     console.log(v1);
+        //     fun2().then(function (res2) {
+        //         console.log(res2);
+        //         console.log(v1);
+        //     })
+        // })
+    </script>
+</body>
+
+</html>
