@@ -14,6 +14,9 @@
     let moon = PIXI.Sprite.from('./images/moon.png');
     let earth = PIXI.Sprite.from('./images/earth.png');
     let satellite = PIXI.Sprite.from('./images/satellite.png');
+    const xyText = new PIXI.Text('',{fill: ['#ffffff'],fontSize:12});
+    xyText.y=5;
+
     moon.x=50;
     moon.y=10;
     earth.x=250;
@@ -21,6 +24,7 @@
     app.stage.addChild(moon);
     app.stage.addChild(earth);
     app.stage.addChild(satellite);
+    app.stage.addChild(xyText);
     // let elapsed = 0.0;
     let s=0;
     let ss=0;
@@ -35,6 +39,7 @@
         satellite.x = (moon.x+5) + Math.cos(ss*3.14159/180)*25;
         satellite.y = (moon.y+5) + Math.sin(ss*3.14159/180)*25;
 
+        xyText.text=`satellite x:${satellite.x} y:${satellite.y}`;
 
     });
 
