@@ -1,0 +1,44 @@
+<html>
+
+<head>
+    <script src="https://pixijs.download/release/pixi.js"></script>
+</head>
+
+<body>
+
+
+</body>
+<script>
+    let app = new PIXI.Application({ width: 640, height: 360 });
+    document.body.appendChild(app.view);
+    let moon = PIXI.Sprite.from('./images/moon.png');
+    let earth = PIXI.Sprite.from('./images/earth.png');
+    let satellite = PIXI.Sprite.from('./images/satellite.png');
+    moon.x=50;
+    moon.y=10;
+    earth.x=250;
+    earth.y=100;
+    app.stage.addChild(moon);
+    app.stage.addChild(earth);
+    app.stage.addChild(satellite);
+    // let elapsed = 0.0;
+    let s=0;
+    let ss=0;
+
+    app.ticker.add((delta) => {  
+        s=(s+1) % 360;  
+        ss=(ss+5) % 360;
+        //console.log(s);
+        moon.x = (earth.x+45) + Math.cos(s*3.14159/180)*120;
+        moon.y = (earth.y+45) + Math.sin(s*3.14159/180)*120;
+
+        satellite.x = (moon.x+5) + Math.cos(ss*3.14159/180)*25;
+        satellite.y = (moon.y+5) + Math.sin(ss*3.14159/180)*25;
+
+
+    });
+
+
+</script>
+
+</html>
