@@ -2,6 +2,7 @@
 
 <head>
     <script src="https://pixijs.download/release/pixi.js"></script>
+
 </head>
 
 <body>
@@ -10,36 +11,54 @@
 </body>
 <script>
     let app = new PIXI.Application({ width: 640, height: 360 });
+    const graphics = new PIXI.Graphics();
+    
+    graphics.beginFill(0xffffff);
+    for(let i=0;i<200;i++){    
+        graphics.drawRect(Math.random()*640, Math.random()*360, 2, 2);
+    }                
+    graphics.endFill();
+
     document.body.appendChild(app.view);
     let moon = PIXI.Sprite.from('./images/moon.png');
     let earth = PIXI.Sprite.from('./images/earth.png');
+   
     let satellite = PIXI.Sprite.from('./images/satellite.png');
-    const xyText = new PIXI.Text('',{fill: ['#ffffff'],fontSize:12});
-    xyText.y=5;
+    earth.anchor.set(0.5);
+    moon.anchor.set(0.5);
+    satellite.anchor.set(0.5);
+    const xyText = new PIXI.Text('', { fill: ['#ffffff'], fontSize: 12 });
+    xyText.y = 5;
 
-    moon.x=50;
-    moon.y=10;
-    earth.x=250;
-    earth.y=100;
+    moon.x = 50;
+    moon.y = 10;
+    earth.x = 640/2;
+    earth.y = 360/2;
+    app.stage.addChild(graphics);
     app.stage.addChild(moon);
     app.stage.addChild(earth);
     app.stage.addChild(satellite);
     app.stage.addChild(xyText);
+    
+
+
+
     // let elapsed = 0.0;
-    let s=0;
-    let ss=0;
+    let s = 0;
+    let ss = 0;
 
-    app.ticker.add((delta) => {  
-        s=(s+1) % 360;  
-        ss=(ss+5) % 360;
+    app.ticker.add((delta) => {
+        s = (s + 1) % 360;
+        ss = (ss + 5) % 360;
         //console.log(s);
-        moon.x = (earth.x+45) + Math.cos(s*3.14159/180)*120;
-        moon.y = (earth.y+45) + Math.sin(s*3.14159/180)*120;
+        moon.x = (640/2 ) + Math.cos(s * 3.14159 / 180) * 110;
+        moon.y = (360/2 ) + Math.sin(s * 3.14159 / 180) * 110;
 
-        satellite.x = (moon.x+5) + Math.cos(ss*3.14159/180)*25;
-        satellite.y = (moon.y+5) + Math.sin(ss*3.14159/180)*25;
+        satellite.x = (moon.x + 5) + Math.cos(ss * 3.14159 / 180) * 30;
+        satellite.y = (moon.y + 5) + Math.sin(ss * 3.14159 / 180) * 30;
 
-        xyText.text=`satellite x:${satellite.x} y:${satellite.y}`;
+        xyText.text = `satellite x:${satellite.x} y:${satellite.y}`;
+        earth.rotation+=0.005;
 
     });
 
