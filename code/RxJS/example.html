@@ -3,16 +3,29 @@
         <script src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
     </head>
     <body>
+        <div id="val"></div>
         <script>
-            const { range, filter, map,from,groupBy,count,mergeMap,toArray,reduce,of } = rxjs;
-            let data=[1,2,2,3,3,3,3];
-            from(data)
+            const { range, filter, map,from,groupBy,count,mergeMap,toArray,reduce,of,delay,concatMap,
+                interval,observeOn,asyncScheduler,queueScheduler,zip ,bufferTime} = rxjs;
+
+                // concatMap(item => of(item).pipe(
+                //     delay(1000)
+                // ))  
+            
+
+            let f1=()=>{console.log('f1')};
+            let f2=()=>{console.log('f2')};
+
+            range(50)
             .pipe(
-               groupBy(item => item,{ element: item => item }),
-               mergeMap(group$ => group$.pipe(reduce((acc, cur) => [...acc, cur], [`${ group$.key }`]))),
-               map(arr => ({ id: parseInt(arr[0], 10), values: arr.slice(1) }))
+                bufferTime(3000)
             )
-            .subscribe(x => console.log(x))
+            .subscribe(x => {
+                console.log(x);
+                //document.getElementById("val").innerText=x;
+            })
+
+            console.log('end')
 
         </script>
     </body>
