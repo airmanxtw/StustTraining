@@ -6,26 +6,21 @@
         <div id="val"></div>
         <script>
             const { range, filter, map,from,groupBy,count,mergeMap,toArray,reduce,of,delay,concatMap,
-                interval,observeOn,asyncScheduler,queueScheduler,zip ,bufferTime} = rxjs;
+                interval,observeOn,asyncScheduler,queueScheduler,zip ,bufferTime,Subject,Observable} = rxjs;
 
                 // concatMap(item => of(item).pipe(
                 //     delay(1000)
                 // ))  
             
 
-            let f1=()=>{console.log('f1')};
-            let f2=()=>{console.log('f2')};
+                const observable = new Observable((subscriber) => {
+                subscriber.next(1);
+                subscriber.next(2);
+                subscriber.next(3);               
+                });
+                
 
-            range(50)
-            .pipe(
-                bufferTime(3000)
-            )
-            .subscribe(x => {
-                console.log(x);
-                //document.getElementById("val").innerText=x;
-            })
-
-            console.log('end')
+            
 
         </script>
     </body>
