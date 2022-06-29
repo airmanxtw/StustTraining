@@ -45,11 +45,11 @@ do
     }
         
     readCount = targetfile.Read(buffer, 0, (int)block);
+    totalRead += readCount;
     if (readCount > 0)
     {
         Page.Response.BinaryWrite(buffer);
         Page.Response.Flush();
-
     }
 
 } while (readCount>0);
