@@ -1,0 +1,34 @@
+<thml>
+    <head>
+        <script src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
+    </head>
+    <body>
+       <script>
+         const { range, filter, map,from,groupBy,count,mergeMap,merge,toArray,reduce,of,delay,concatMap,
+                interval,observeOn,asyncScheduler,queueScheduler,zip ,bufferTime,Subject,Observable,
+                } = rxjs;
+        
+        const {ajax} =rxjs.ajax
+
+        const j1 = ajax.getJSON("https://jsonplaceholder.typicode.com/posts/1");
+        const j2 = ajax.getJSON("https://jsonplaceholder.typicode.com/postsx/2");
+        const j3 = ajax.getJSON("https://jsonplaceholder.typicode.com/posts/3");
+
+        let success=[];
+        merge(j1,j2,j3).subscribe({
+            next:(x)=>{
+                success.push(x.id);
+                console.log(x);
+            },
+            error:(err)=>{
+                console.log(err);
+                console.log(success);
+            },
+            complete:()=>{
+                console.log('tasks complete');
+            }
+        })
+        
+       </script>
+    </body>
+</thml>
