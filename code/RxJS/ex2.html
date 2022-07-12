@@ -1,0 +1,35 @@
+<thml>
+    <head>
+        <script src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
+    </head>
+    <body>
+       <script>
+         const { range, filter, map,from,groupBy,count,mergeMap,merge,toArray,reduce,of,delay,concatMap,
+                interval,observeOn,asyncScheduler,queueScheduler,zip ,bufferTime,Subject,Observable,
+                } = rxjs;
+        
+        const add=(x1,x2)=>{
+            return new Promise((resolve,reject)=>{
+                resolve(x1+x2);
+            })
+        };
+        const dd=(x)=>{
+            return new Promise((resolve,reject)=>{
+                resolve(x*2);
+            })
+        };
+
+       //d(10,9),dd(88))
+        // .pipe(
+        //     concatMap(p => of(p).subscribe(x=>
+
+        //     ))  
+        // )
+        // .toPromise()
+        // .subscribe((p)=>{
+        //    console.log(p);
+        // })
+        
+       </script>
+    </body>
+</html>
