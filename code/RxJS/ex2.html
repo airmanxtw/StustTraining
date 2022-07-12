@@ -19,16 +19,13 @@
             })
         };
 
-       //d(10,9),dd(88))
-        // .pipe(
-        //     concatMap(p => of(p).subscribe(x=>
-
-        //     ))  
-        // )
-        // .toPromise()
-        // .subscribe((p)=>{
-        //    console.log(p);
-        // })
+       of(add(10,2),dd(7))
+       .pipe(
+        map(x=>await x.then((r)=>r))
+       )
+       .subscribe(x=>{
+        console.log(x)
+       })
         
        </script>
     </body>
