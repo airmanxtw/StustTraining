@@ -19,12 +19,12 @@
    ```csharp
     public class jwtProvider2
     {
-        private string pKey = "<RSAKeyValue><Modulus>4OMwdkZhujGtXSlZsoY3zak/Jw8DhV+jPXPvU9AiLzxn2RTbpfuAxpxfipmGQIrHiALzNfbs4RpHzgHQTMm+jEPzx++NIFpydi6lMZ0jmzKF7F2iWKnJGKmKn6cD4LflTUUGjC6faZIjk+9c3YNTa1TjQIOMNRD8yNp2PkfEDhc=</Modulus><Exponent>AQAB</Exponent><P>9/jjuP8iniR6qrLPXDCKltP0G/oTedVSrniRv6x3BIfu/zfdsEt58R9pql3FgUner1uYQZ69sr+xFa6ZGQFhNQ==</P><Q>6Cr7IUasGYIHPLH8f8jKAtQ1Iq7/SWV/MJw4tCL/yyv7Aw5h73U9k5ljKGafqs9tg5mIOprHM0ikP+UtBabHmw==</Q><DP>OdKNt2u29M1o1TkQ5VxkVLtj5sovlG9L8mcnBVz/+8x+zICIbz2KV9GNYC6xiW5iQN3I6TRM48uTTY0DIjOSKQ==</DP><DQ>6CoS9zO05c0hb5CM7zvaxvluKUDWCI92oSWXjotxP7q7SFMZnFuhN/grMDtvb1/+I5tknzYn/SCnHz4Nx5kAAQ==</DQ><InverseQ>nLpw76AXKb761nLqL/Mw2b0lgDtM3MhqFzmEKGf0NfxYCT28ymjJH//wsTf1m9GCT9D2U2w0yDCvpD8LwDAbMQ==</InverseQ><D>NHCFsm7DBxniZSDpS5nElW5rzX3Qwl8Ev6WzHwYfkogxZwtYFKJK6wU3uigGiDJUSMD3WZQUtIDeUYlWuzEn/zk7GAzgLocZrAKZX6DlbMTkoUUtt0EF2DgJtgdUp4V/TrgYA0IlZ7t9NKTUYOtmIDBXSJysiWvayL0p2f8sBBE=</D></RSAKeyValue>";
-        private string rKey = "<RSAKeyValue><Modulus>4OMwdkZhujGtXSlZsoY3zak/Jw8DhV+jPXPvU9AiLzxn2RTbpfuAxpxfipmGQIrHiALzNfbs4RpHzgHQTMm+jEPzx++NIFpydi6lMZ0jmzKF7F2iWKnJGKmKn6cD4LflTUUGjC6faZIjk+9c3YNTa1TjQIOMNRD8yNp2PkfEDhc=</Modulus><Exponent>AQAB</Exponent><P>9/jjuP8iniR6qrLPXDCKltP0G/oTedVSrniRv6x3BIfu/zfdsEt58R9pql3FgUner1uYQZ69sr+xFa6ZGQFhNQ==</P><Q>6Cr7IUasGYIHPLH8f8jKAtQ1Iq7/SWV/MJw4tCL/yyv7Aw5h73U9k5ljKGafqs9tg5mIOprHM0ikP+UtBabHmw==</Q><DP>OdKNt2u29M1o1TkQ5VxkVLtj5sovlG9L8mcnBVz/+8x+zICIbz2KV9GNYC6xiW5iQN3I6TRM48uTTY0DIjOSKQ==</DP><DQ>6CoS9zO05c0hb5CM7zvaxvluKUDWCI92oSWXjotxP7q7SFMZnFuhN/grMDtvb1/+I5tknzYn/SCnHz4Nx5kAAQ==</DQ><InverseQ>nLpw76AXKb761nLqL/Mw2b0lgDtM3MhqFzmEKGf0NfxYCT28ymjJH//wsTf1m9GCT9D2U2w0yDCvpD8LwDAbMQ==</InverseQ><D>NHCFsm7DBxniZSDpS5nElW5rzX3Qwl8Ev6WzHwYfkogxZwtYFKJK6wU3uigGiDJUSMD3WZQUtIDeUYlWuzEn/zk7GAzgLocZrAKZX6DlbMTkoUUtt0EF2DgJtgdUp4V/TrgYA0IlZ7t9NKTUYOtmIDBXSJysiWvayL0p2f8sBBE=</D></RSAKeyValue>";
-        RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+        private string pKey = "<RSAKeyValue><Modulus>t9n3nerIULwfGDdnMcWOhSFbv4menaAbjXw2Jc3zrW5IyFVd/mZcr6sl3Tt+Io+k7ORL3izw4ccGrpmYtUvz3U7yT9OdhpMU7XpHDQzgpftYlzCa0M6/gi7E1CetBMaRN1YTzx4/GUFu08c9W2/jJDl8fj0QycQtaz9PzVCTQqUhCCusPyYz7Kz2m4F1keCG/5lhGgMOT89KvLrVZJ1VPEjTGZwckRNtEwIAjEXU7vYH5jI4vnjsDSvR3cd0FUFAb93fYUh2J4RnBmoSz4wHqBk1wkkdNpauW2tG5XViSlvAPxacLY26YXL7f3DLs5o4xr0jh7mfOc3FPz94zYpqIps=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>";
+        private string rKey = "<RSAKeyValue><Modulus>t9n3nerIULwfGDdnMcWOhSFbv4menaAbjXw2Jc3zrW5IyFVd/mZcr6sl3Tt+Io+k7ORL3izw4ccGrpmYtUvz3U7yT9OdhpMU7XpHDQzgpftYlzCa0M6/gi7E1CetBMaRN1YTzx4/GUFu08c9W2/jJDl8fj0QycQtaz9PzVCTQqUhCCusPyYz7Kz2m4F1keCG/5lhGgMOT89KvLrVZJ1VPEjTGZwckRNtEwIAjEXU7vYH5jI4vnjsDSvR3cd0FUFAb93fYUh2J4RnBmoSz4wHqBk1wkkdNpauW2tG5XViSlvAPxacLY26YXL7f3DLs5o4xr0jh7mfOc3FPz94zYpqIps=</Modulus><Exponent>AQAB</Exponent><P>DqDPBcsuSq5PKeMJ3IKiO5VfIAy8fczE+F8nyCthaPiuafdOW1Ysza+r6M2+XmtKAkKe16uX1Mkqs8njdh4y6Ouv2Y95QYWYSlnkkq1R36PLNthEs6Og+yNMSdoyqb5qSHhRjRqz+zqCjWB2OYUEZLzLdUqYhtZa6LS9Hw5auiof</P><Q>DJF9p2sqqaeEi8zawfirDyQbHe+IUuWCPoCh6ywotm7nQywtLcz4zWr6eU7drO7dgDAcB/1RCbMWWEwMMkLs+mCUQyPnaSGo+UYYDNFHhTBHZ3ntzsB2V7HilVQukIe7s+PfdmKqN7KFgZYeQaBELlYCwxjj+4nQYmq9UAeB7rAF</Q><DP>BoRT1sPvKqw/bmzMfuXf+uWQDIpAC1eHxRM3ePECo65unZzk1sIskbIax0up7QylWx5s/65dpRm+IXznDj9j9OrTW/yUS8GF2FH2B/aZTCX/qb5t1Q4n8NqH6TsBaSgA16pqwo9L8bfeY7e+099T1sFZbza9fwzOUW/79XMCrn+H</DP><DQ>CxwtlGpiezhvLdm341H7fNXw9qSAwK7LVI8HE0mk76fX3QRXJ66SnZucsNFrmexJd4CPtuxRz540+Xa4LVIGBEqNpVA+xyuPIFO6/NGfRHhqFmmtM1/k/R5tao3Q38hsv9eG+TK8v6Ga7POT6XVP8BnuNSJyni+0OtuaX/1S+Xk1</DQ><InverseQ>AdvjM1lDnFofC3EP6kRB/22kgGYCDtnC2yO9lsMUP0z4Ah0K3YjGCZQOQrYMvEY1GJjPm0lNEmGsRvM3q1C77grhGPPDGANF1TmGQOBiLN0hSXlwNw5yB9pS4XCx7L8souDQrfj398Fr6JLvr6SCnliPb1XkXGbj6hdP1B0CaZwm</InverseQ><D>cK+3luI1304+3M/wf1AwV6cnnhGS19gvqxvL8IX4an+jOq8gSnKhMsb7EUuKt1JF6zDO06HGDwy3KsNYFx8znJzr5kO1VKvH8vq0m+ods36IQTr4WS2vsfJKkCK1aKzwivNGdvd6A1fYvxNqpyXAGg7mIFX7eT+1+vs2RYiyifGtzvW8ab+rzyDgKsnaB6s9EVm6Y1ucVnb2fcCKd2sj3nfjt6Ul2AYhYVF+ncB6nquqnigzwQSnXACaMzAwWfrtJIn1CjR9xeLgysIhISdm6AAWSAyC3qxTA8b4Zv2CvXna07KYUL0BEDkNO6GV+nVO1CeHlpGioj51Dg3uM9fbFTk=</D></RSAKeyValue>";
+        RSACryptoServiceProvider _rsa = new RSACryptoServiceProvider();                
 
         public string encode(string userid, List<string> roles)
-        {
+        {                        
             var payload = new Dictionary<string, object>()
             {
                 { "userid",userid},
@@ -32,22 +32,23 @@
                 {"roles",roles}
             };
          
-            var publicKey = RSA.Create();
-            publicKey.FromXmlString(pKey);
+            var privateKey = RSA.Create();
+            privateKey.FromXmlString(rKey);
 
-            string token = Jose.JWT.Encode(payload, publicKey, JwsAlgorithm.RS512);
+            string token = Jose.JWT.Encode(payload, privateKey, JwsAlgorithm.RS512);
             return token;
         }
 
         public Models.JwtModel  decode(string token)
         {
             
-             var privateKey = RSA.Create();
-             privateKey.FromXmlString(rKey);
-             var result=Jose.JWT.Decode(token, privateKey);
+             var publicKey = RSA.Create();
+             publicKey.FromXmlString(pKey);
+             var result = Jose.JWT.Decode(token, publicKey);
              var obj = JsonConvert.DeserializeObject<Models.JwtModel>(result);
              return obj;
         }
+
     }
    ``` 
 4. 繼承AuthorizeAttribute實作一個自訂Authorize
