@@ -1,6 +1,6 @@
 # asp.net mvc 4 webapi jwt authentication
 1. 安裝 jose-jwt 4.0
-2. 建立一個model 
+2. 建立一個登入者的model 
    ```csharp
     public class JwtModel
     {
@@ -49,4 +49,111 @@
              return obj;
         }
     }
-   ```
+   ``` 
+4. 繼承AuthorizeAttribute實作一個自訂Authorize
+   ```csharp
+    public class AppAuthorizeAttribute : AuthorizeAttribute
+    {
+        public AppAuthorizeAttribute()
+        {
+           
+        }
+        protected override bool IsAuthorized(System.Web.Http.Controllers.HttpActionContext actionContext)
+        {
+            try
+            {
+                var token = HttpContext.Current.Request.Headers["Authorization"].ToString();
+                jwtProvider2 jp = new jwtProvider2();
+                var jwt = jp.decode(token);
+                var roles = this.Roles.Split(new char[1] { ',' }).Select(s => s.Trim()).ToList();                
+                return jwt.expDate > DateTime.Now && (string.IsNullOrEmpty(this.Roles) || roles.Intersect(jwt.roles).Count()>0)  ? true : false;
+            }
+            catch(Exception)
+            {
+                return false;
+            }            
+        }               
+    }
+   ``` 
+5. 對ApiController做一個Extension,目的是要在ApiControll裡可以拿到user物件
+   ```csharp
+    public static class MyExtensions
+    {
+        public static Models.JwtModel  GetAuthorization(this ApiController ac)
+        {
+            try
+            {
+                string token = ac.Request.Headers.Authorization.ToString();
+                jwtProvider2 jp = new jwtProvider2();
+                return jp.decode(token);
+            }
+            catch (Exception)
+            {
+                return null;
+            }                        
+        }
+    }
+   ``` 
+6. 做一個登入的api
+   ```csharp
+    [AllowAnonymous]
+    // POST api/login
+    public HttpResponseMessage Post([FromBody]Models.LoginModel  login)
+    {
+        if (login.userid == "airmanx" && login.password == "12345")
+        {
+            Api.jwtProvider2 j2 = new Api.jwtProvider2();
+            List<string> roles = new List<string>() { "admin", "user" };
+            var token = j2.encode(login.userid, roles);                
+            return Request.CreateResponse(HttpStatusCode.OK, token);
+        }
+        else
+        {
+            return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "userid or password error");
+        }
+    }
+   ``` 
+7. 取資料的api
+   ```csharp
+    [AppAuthorize(Roles="admin")]
+    // GET api/values
+    public string  Get()
+    {
+        return string.Format("{0}抓到資料", this.GetAuthorization().userid);
+    }
+   ``` 
+8. 登入的javascript
+   ```javascript
+   $("#Button1").click(function () {
+        var login={userid:'airmanx',password:'1234'};
+        axios.post("http://localhost:56457/api/login",{
+            userid:'airmanx',
+            password:'12345'
+        })
+        .then(function(res){
+            $("#token").val(res.data);
+        })
+        .catch(function(err){                    
+            alert(err.response.data.Message);
+        });
+        return false;
+    });
+   ``` 
+9. 取資料的javascript
+   ```javascript
+   $("#Button2").click(function () {                
+        var token=$("#token").val();
+        axios.get("http://localhost:56457/api/values",{
+            headers:{
+                "Authorization":token
+            }
+        })
+        .then(function(res){
+            alert(res.data);
+        })
+        .catch(function(err){                    
+            alert(err.response.data.Message);
+        });
+        return false;
+    });
+   ``` 
