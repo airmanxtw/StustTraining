@@ -158,3 +158,14 @@
         return false;
     });
    ``` 
+10. 在web.config裡的system.webServer裡加入CORS
+    ```xml
+    <httpProtocol>
+      <customHeaders>
+        <clear />
+        <add name="Access-Control-Allow-Origin" value="*" />
+        <add name="Access-Control-Allow-Headers" value="*"/>
+        <add name="Access-Control-Allow-Methods" value="GET,POST,PUT,DELETE,OPTIONS"/>
+      </customHeaders>
+    </httpProtocol>
+    ```
