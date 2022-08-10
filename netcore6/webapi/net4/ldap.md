@@ -1,6 +1,9 @@
 1. 加入參考System.DirectoryServices<br/>
    ![system](systemd.png) 
-2. ```csharp    
+2. ```csharp  
+    using System.DirectoryServices;
+    ...
+    ...
     public enum Ou
     {
         faculty=0,
