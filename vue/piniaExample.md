@@ -1,12 +1,25 @@
 ```js 
 import { defineStore } from "pinia";
-import { ref, computed } from "vue";
+import { ref, computed, watch, onMounted } from "vue";
 import jwt_decode from "jwt-decode";
 import moment from "moment";
 export const useStore = defineStore(
   "main",
   () => {
     let token = ref(null);
+
+    watch(
+      () => token.value,
+      (newVal) => {
+        if (!!newVal == true) sessionStorage.setItem("token", newVal);
+        else sessionStorage.removeItem("token");
+      }
+    );
+
+    onMounted(() => {
+      if (!!token.value == false && !!sessionStorage.getItem("token") == true)
+        token.value = sessionStorage.getItem("token");
+    });
 
     const isLogin = computed(() => !!token.value == true && !isExpired.value);
 
@@ -23,6 +36,18 @@ export const useStore = defineStore(
     const isExpired = computed(() =>
       !!tokenObject.value == true ? moment().isAfter(exp.value) : false
     );
+
+    const tokenHeaders = computed(() => {
+      return !!token.value == true
+        ? {
+            headers: {
+              Authorization: `bearer ${token.value}`,
+            },
+          }
+        : {
+            headers: {},
+          };
+    });
 
     const user = computed(() => {
       if (!!tokenObject.value == true) {
@@ -45,17 +70,13 @@ export const useStore = defineStore(
     const login = (key) => {
       token.value = key;
     };
-    
+
     const logout = () => {
       token.value = null;
     };
 
-    return { isExpired, user, exp, isLogin, login, logout };
-  },
-  {
-    persist: {
-      enabled: true,
-    },
-  }
+    return { isExpired, user, exp, isLogin, login, logout, tokenHeaders };
+  }, 
 );
+
 ```
