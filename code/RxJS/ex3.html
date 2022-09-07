@@ -7,7 +7,7 @@
        <script>
          const { range, filter, map,from,groupBy,count,mergeMap,merge,toArray,reduce,of,delay,concatMap,
                 interval,observeOn,asyncScheduler,queueScheduler,zip ,bufferTime,Subject,Observable,
-                switchMap} = rxjs;
+                switchMap,retry} = rxjs;
         
             const g1 = () => axios.get("https://jsonplaceholder.typicode.com/posts/1").then(res=>{
                 console.log(res.data);
@@ -15,7 +15,8 @@
         
         of(g1)
         .pipe(
-            concatMap(x => of(x).pipe(map(x=>x())))
+            concatMap(x => of(x).pipe(map(x=>x()))),
+            retry(3)
         )
         .subscribe(x=>{
             console.log(x)
