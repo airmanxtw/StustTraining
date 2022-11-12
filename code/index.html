@@ -8,8 +8,19 @@
 
     <div>v2</div>
     <svelte-title id="svelte-title"></svelte-title>
+
+    <svg width="100%" height="50" xmlns="http://www.w3.org/2000/svg">
+        <rect width="100%" height="50" fill="red" />
+        <foreignObject x="0" y="0" width="100%" height="50" >
+            <div xmlns="http://www.w3.org/1999/xhtml">
+            <input></input>
+            </div>
+        </foreignObject>
+      </svg>
     <script>
         document.querySelector('#svelte-title').$on('add2', (e) => { console.log(e) })
+
+        
     </script>
 </body>
 
