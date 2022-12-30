@@ -33,7 +33,7 @@ public static bool isImage(byte[] source)
 
 # is PDF  
 ```csharp
-public static bool isImage(byte[] source)
+public static bool isPDF(byte[] source)
 {
     try
     {
