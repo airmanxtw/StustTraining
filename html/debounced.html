@@ -17,6 +17,10 @@
                 console.log('this is click');
             }))
 
+            $.get("http://localhost:5080/WeatherForecast/test",(res)=>{
+                console.log(res);
+            })
+
         })
     </script>
     <input id="button" type="button" value="click me" />
