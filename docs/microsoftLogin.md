@@ -1,5 +1,5 @@
 # microsoft 第三方驗證
-1. 先註冊應用程式 https://dotblogs.com.tw/supershowwei/2022/11/20/integrate-microsoft-login-in-asp-net-core
+1. 先註冊應用程式 https://go.microsoft.com/fwlink/?linkid=2083908
 2. 選擇應用程式類型,需注意登入的範圍,是個人的,還是組織的(例如office.stust.edu.tw)
 3. 可參考這篇文章 https://dotblogs.com.tw/supershowwei/2022/11/20/integrate-microsoft-login-in-asp-net-core
 4. 組授權網址時需注意tenant的參數,有common、organizations、consumers 及租用戶識別碼,可參考 https://github.com/MicrosoftDocs/azure-docs.zh-tw/blob/master/articles/active-directory/develop/active-directory-v2-protocols.md#endpoints
