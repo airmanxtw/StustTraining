@@ -3,9 +3,9 @@
     If System.IO.Path.GetExtension(filename).ToLower = ".pdf" Then
         Dim pdf As New CMPDF.pdf()
         Dim newBytes = pdf.compression(bytes)
-        Return fs.UploadFileByDirectory(newBytes, filename, "StudentLicense")
+        Return fs.UploadFileByDirectory(newBytes, filename, "DirName")
     Else
-        Return fs.UploadFileByDirectory(bytes, filename, "StudentLicense")
+        Return fs.UploadFileByDirectory(bytes, filename, "DirName")
     End If
 End Function
 ```
