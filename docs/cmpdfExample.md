@@ -1,4 +1,4 @@
-## cmpdf dll download
+## cmpdf dll download for .net 4.x
 [download here](https://my.stust.edu.tw/board.php?courseID=4136&f=doc&cid=3453476)
 
 ## cmpdf vb example
