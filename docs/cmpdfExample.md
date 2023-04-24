@@ -1,3 +1,4 @@
+## cmpdf vb example
 ```vb
  Function Uploadfile(ByVal bytes As Byte(), ByVal filename As String) As String
     If System.IO.Path.GetExtension(filename).ToLower = ".pdf" Then
