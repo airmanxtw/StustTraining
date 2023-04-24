@@ -1,0 +1,14 @@
+{
+  "public": {
+    "fields": [
+      { "name": "系所", "type": "string" },
+      { "name": "主持人", "type": "string" }
+    ]
+  },
+  "group": [
+    {
+      "name": "T-1-8",
+      "fields": [{ "name": "主持費", "type": "number" }]
+    }
+  ]
+}
