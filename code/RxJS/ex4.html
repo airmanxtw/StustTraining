@@ -1,29 +1,48 @@
-<thml>
-    <head>
-        <script src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
-    </head>
-    <body>
-       <script>
-         const { range, filter, map,from,groupBy,count,mergeMap,merge,toArray,reduce,of,delay,concatMap,
-                interval,observeOn,asyncScheduler,queueScheduler,zip ,bufferTime,Subject,Observable,
-                retry,throwError} = rxjs;
-        
-        const {ajax} =rxjs.ajax;
-       
-        const test=(callback)=>{
-            callback('hello');
-        }
+<html>
+  <head>
+    <script src="https://unpkg.com/rxjs@^7/dist/bundles/rxjs.umd.min.js"></script>
+  </head>
+  <body>
+    <script>
+      const {
+        range,
+        filter,
+        map,
+        from,
+        groupBy,
+        count,
+        mergeMap,
+        merge,
+        toArray,
+        reduce,
+        of,
+        delay,
+        concatMap,
+        interval,
+        observeOn,
+        asyncScheduler,
+        queueScheduler,
+        zip,
+        bufferTime,
+        Subject,
+        Observable,
+        retry,
+        throwError,
+      } = rxjs;
 
-        let g = rxjs.bindCallback(test);
+      const { ajax } = rxjs.ajax;
 
-        g()
-        .pipe(throwError('hello'),retry(3))
-        .subscribe((x)=>{
-            console.log(x);
-        })
+      const test = (callback) => {
+        callback("hello");
+      };
 
-       
-        
-       </script>
-    </body>
+      let g = rxjs.bindCallback(test);
+
+      g()
+        .pipe(throwError("hello"), retry(3))
+        .subscribe((x) => {
+          console.log(x);
+        });
+    </script>
+  </body>
 </html>

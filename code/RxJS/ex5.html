@@ -26,28 +26,24 @@
         bufferTime,
         Subject,
         Observable,
+        retry,
+        throwError,
       } = rxjs;
 
-      const { ajax } = rxjs.ajax;
+      const obj1 = { name: "airmanx", age: 10, height: 200 };
+      const obj2 = { x: "airmanx", y: 10, z: 200 };
 
-      const j1 = ajax.getJSON("https://jsonplaceholder.typicode.com/posts/1");
-      const j2 = ajax.getJSON("https://jsonplaceholder.typicode.com/postsx/2");
-      const j3 = ajax.getJSON("https://jsonplaceholder.typicode.com/posts/3");
-
-      let success = [];
-      merge(j1, j2, j3).subscribe({
-        next: (x) => {
-          success.push(x.id);
+      of(obj1, obj2)
+        .pipe(concatMap((b) => from(Object.keys(b))))
+        .subscribe((x) => {
           console.log(x);
-        },
-        error: (err) => {
-          console.log(err);
-          console.log(success);
-        },
-        complete: () => {
-          console.log("tasks complete");
-        },
+        });
+
+      of(1, 2, 3).subscribe((c) => {
+        console.log(c);
       });
+
+      console.log("complete");
     </script>
   </body>
 </html>
