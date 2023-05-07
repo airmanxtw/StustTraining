@@ -29,26 +29,63 @@
         retry,
         throwError,
         exhaustMap,
+        takeWhile,
       } = rxjs;
 
-      const obj1 = [2, 3, 4, 5, 6, 7, 8, 9];
+      const obj1 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
       const obj2 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-      for (let i = 0; i < obj1.length; i++) {
-        for (let j = 0; i < obj2.length; j++) {
-          console.log(`${obj1[i]}*${obj2[j]}=${obj1[i] * obj2[j]}`);
-        }
+      //example 1
+      // forEach(let obj in obj1){
+
+      // }
+
+      //example2
+      obj1.forEach(obj=>{
+        break;
+        console.log(obj);
+      })
+
+      //example3
+      for (let item in obj1) {
+        console.log(item);
+        break;
       }
 
+      // example 2
+      // obj1.forEach((item) => {
+      //   if (item % 2 == 0) break;
+      //   else
+      //    console.log(item);
+      // });
+
+      // example4
+      for (let i = 0; i < obj1.length; i++)
+        if (obj1[i] % 2 == 0) break;
+        else console.log(obj1[i]);
+
+      // example5
       from(obj1)
-        .pipe(
-          concatMap((o1) =>
-            from(obj2).pipe(map((o2) => `${o1}*${o2}=${o1 * o2}`))
-          )
-        )
-        .subscribe((c) => {
-          console.log(c);
+        .pipe(takeWhile((obj) => obj % 2 != 0))
+        .subscribe((obj) => {
+          console.log(obj);
         });
+
+      // for (let i = 0; i < obj1.length; i++) {
+      //   for (let j = 0; i < obj2.length; j++) {
+      //     console.log(`${obj1[i]}*${obj2[j]}=${obj1[i] * obj2[j]}`);
+      //   }
+      // }
+
+      // from(obj1)
+      //   .pipe(
+      //     concatMap((o1) =>
+      //       from(obj2).pipe(map((o2) => `${o1}*${o2}=${o1 * o2}`))
+      //     )
+      //   )
+      //   .subscribe((c) => {
+      //     console.log(c);
+      //   });
 
       console.log("complete");
     </script>
