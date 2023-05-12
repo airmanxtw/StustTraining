@@ -40,36 +40,18 @@
 
       // }
 
-      //example2
-      obj1.forEach(obj=>{
-        break;
-        console.log(obj);
-      })
+      const fun1 = async () => {
+        await new Promise((r) => setTimeout(r, 3000));
+        return "fun1";
+      };
+      const fun2 = async () => {
+        await new Promise((r) => setTimeout(r, 1000));
+        return "fun2";
+      };
 
-      //example3
-      for (let item in obj1) {
-        console.log(item);
-        break;
-      }
+      const funcs = [fun1, fun2];
 
-      // example 2
-      // obj1.forEach((item) => {
-      //   if (item % 2 == 0) break;
-      //   else
-      //    console.log(item);
-      // });
-
-      // example4
-      for (let i = 0; i < obj1.length; i++)
-        if (obj1[i] % 2 == 0) break;
-        else console.log(obj1[i]);
-
-      // example5
-      from(obj1)
-        .pipe(takeWhile((obj) => obj % 2 != 0))
-        .subscribe((obj) => {
-          console.log(obj);
-        });
+      from(funcs).pipe(map((m) => m));
 
       // for (let i = 0; i < obj1.length; i++) {
       //   for (let j = 0; i < obj2.length; j++) {
