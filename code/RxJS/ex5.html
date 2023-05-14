@@ -40,18 +40,15 @@
 
       // }
 
-      const fun1 = async () => {
-        await new Promise((r) => setTimeout(r, 3000));
-        return "fun1";
-      };
-      const fun2 = async () => {
-        await new Promise((r) => setTimeout(r, 1000));
-        return "fun2";
-      };
+      const fun1 = new Observable((subscriber) => {
+        setInterval(() => {
+          subscriber.next("hello");
+        }, 3000);
+      });
 
-      const funcs = [fun1, fun2];
-
-      from(funcs).pipe(map((m) => m));
+      fun1.pipe(map((x) => x + "!")).subscribe((res) => {
+        console.log(res);
+      });
 
       // for (let i = 0; i < obj1.length; i++) {
       //   for (let j = 0; i < obj2.length; j++) {
