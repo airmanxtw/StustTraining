@@ -1,0 +1,31 @@
+<html>
+  <body>
+    <script>
+      // pure function
+      const add = (x, y) => {
+        return x + y;
+      };
+
+      // impure function
+      let y2 = 10;
+      const add2 = (x) => {
+        return x + y2;
+      };
+
+      // impure function
+      const add3 = (x, y) => {
+        return x++ + y++;
+      };
+
+      // impure function
+      const add4 = (x) => {
+        return x + Math.random();
+      };
+
+      // impure function
+      const add5 = async (x) => {
+        return x + 1;
+      };
+    </script>
+  </body>
+</html>
