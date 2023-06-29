@@ -6,10 +6,21 @@
         return x + y;
       };
 
+      // pure function
+      const callAdd = (x, y) => {
+        return add(x, y) * add(x, y);
+      };
+
       // impure function
       let y2 = 10;
       const add2 = (x) => {
         return x + y2;
+      };
+
+      // pure function
+      const y3 = 10;
+      const add22 = (x) => {
+        return x + y3;
       };
 
       // impure function
