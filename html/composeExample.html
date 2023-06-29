@@ -1,0 +1,25 @@
+<html>
+  <header>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src=" https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js "></script>
+    <script src="https://cdn.jsdelivr.net/g/lodash@4(lodash.min.js+lodash.fp.min.js)"></script>
+  </header>
+
+  <body>
+    <script>
+      $(document).ready(function () {
+        const remainder = (x) => x % 2
+        const square = (x) => x * x;
+        
+
+        let timeId = undefined;
+        const test = _.compose(
+          (x) => x + 1,
+          (x) => x + 2,
+          (x) => x * 3
+        );
+      });
+    </script>
+    <input id="button" type="button" value="click me" />
+  </body>
+</html>
