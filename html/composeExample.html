@@ -11,15 +11,21 @@
       const square = (x) => x * x;
       const half = (x) => x / 2;
 
+      // 命令式寫法
       const method0 = (x, y) => {
-        return half(square(add(x, y)));
+        const result = add(x, y);
+        const squared = square(result);
+        const halved = half(squared);
+        return halved;
       };
 
-      const method1 = (x, y) => {
-        return R.compose(half, square, add)(x, y);
-      };
+      // 函數式寫法
+      const method1 = (x, y) => half(square(add(x, y)));
 
-      document.getElementById("val").innerHTML = method1(2, 3);
+      // Ramda 函數式寫法
+      const method2 = (x, y) => R.compose(half, square, add)(x, y);
+
+      document.getElementById("val").innerHTML = method2(2, 3);
     </script>
   </body>
 </html>
