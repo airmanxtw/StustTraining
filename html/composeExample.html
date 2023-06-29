@@ -7,25 +7,32 @@
     <span>value:</span>
     <span id="val"></span>
     <script>
-      const add = (x, y) => x + y;
-      const square = (x) => x * x;
-      const half = (x) => x / 2;
+      const add = async (x, y) => x + y;
+      const square = async (x) => x * x;
+      const half = async (x) => x / 2;
 
       // 命令式寫法
-      const method0 = (x, y) => {
-        const result = add(x, y);
-        const squared = square(result);
-        const halved = half(squared);
+      const method0 = async (x, y) => {
+        const result = await add(x, y);
+        const squared = await square(result);
+        const halved = await half(squared);
         return halved;
       };
 
       // 函數式寫法
-      const method1 = (x, y) => half(square(add(x, y)));
+      const method1 = async (x, y) =>
+        add(x, y)
+          .then((val) => square(val))
+          .then((val) => half(val));
 
       // Ramda 函數式寫法
-      const method2 = (x, y) => R.compose(half, square, add)(x, y);
+      const method2 = async (x, y) => R.composeP(half, square, add)(x, y);
 
-      document.getElementById("val").innerHTML = method2(2, 3);
+      method2(2, 3).then((result) => {
+        document.getElementById("val").innerHTML = result;
+      });
+
+      //document.getElementById("val").innerHTML = method2(2, 3);
     </script>
   </body>
 </html>
