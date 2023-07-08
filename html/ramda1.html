@@ -1,0 +1,22 @@
+<html>
+  <header>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/ramda/0.26.0/ramda.min.js"></script>
+  </header>
+
+  <body>
+    <span>value:</span>
+    <span id="val"></span>
+    <script>
+      const double1 = (x) => null;
+      const double2 = (x) => {
+        if (x == 2) throw new Error("not implemented");
+        else return x + 2;
+      };
+
+      const result = R.either(double1, double2)(3);
+      console.log(result);
+
+      document.getElementById("val").innerHTML = result;
+    </script>
+  </body>
+</html>
