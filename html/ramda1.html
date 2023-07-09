@@ -7,14 +7,8 @@
     <span>value:</span>
     <span id="val"></span>
     <script>
-      const double1 = (x) => null;
-      const double2 = (x) => {
-        if (x == 2) throw new Error("not implemented");
-        else return x + 2;
-      };
-
-      const result = R.either(double1, double2)(3);
-      console.log(result);
+      const run = R.ifElse(R.pipe(R.modulo(R.__, 2), R.equals(R.__, 0)), R.inc, (val) => val * val);
+      const result = run(4);
 
       document.getElementById("val").innerHTML = result;
     </script>
