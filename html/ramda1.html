@@ -7,8 +7,13 @@
     <span>value:</span>
     <span id="val"></span>
     <script>
-      const run = R.ifElse(R.pipe(R.modulo(R.__, 2), R.equals(R.__, 0)), R.inc, (val) => val * val);
-      const result = run(4);
+      const fun1 = async () => Promise.reject("error");
+      const fun2 = async () => Promise.resolve("success");
+
+      const fun3 = R.either(fun1, fun2);
+
+      const result = await fun3();
+      debugger;
 
       document.getElementById("val").innerHTML = result;
     </script>
