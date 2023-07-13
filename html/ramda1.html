@@ -7,15 +7,10 @@
     <span>value:</span>
     <span id="val"></span>
     <script>
-      const fun1 = async () => Promise.reject("error");
-      const fun2 = async () => Promise.resolve("success");
+      const fun1 = (a, b, c) => a + b * c;
+      const fun2 = R.partial(fun1);
 
-      const fun3 = R.either(fun1, fun2);
-
-      const result = await fun3();
-      debugger;
-
-      document.getElementById("val").innerHTML = result;
+      document.getElementById("val").innerHTML = fun2([1, 2, 3]);
     </script>
   </body>
 </html>
