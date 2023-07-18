@@ -7,10 +7,12 @@
     <span>value:</span>
     <span id="val"></span>
     <script>
-      const fun1 = (a, b, c) => a + b * c;
-      const fun2 = R.partial(fun1);
+      const fun1 = R.add(10);
+      const fun2 = R.multiply(2);
+      const fun3 = null + "2";
+      const fun = R.compose(fun1, () => null, fun2);
 
-      document.getElementById("val").innerHTML = fun2([1, 2, 3]);
+      document.getElementById("val").innerHTML = fun3;
     </script>
   </body>
 </html>
