@@ -7,12 +7,10 @@
     <span>value:</span>
     <span id="val"></span>
     <script>
-      const fun1 = R.add(10);
-      const fun2 = R.multiply(2);
-      const fun3 = null + "2";
-      const fun = R.compose(fun1, () => null, fun2);
+      const obj1 = { a: 1, b: 2, c: 3 };
+      const fun1 = R.propOr(0, "c", null);
 
-      document.getElementById("val").innerHTML = fun3;
+      document.getElementById("val").innerHTML = fun1;
     </script>
   </body>
 </html>
