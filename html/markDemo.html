@@ -1,0 +1,39 @@
+<html lang="utf-8">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <script>
+        $(document).ready(function(){
+            $("#markdown2").on('input',function(){
+                var html=marked.parse($(this).val(),{breaks:true});
+               $("#html2").html(html);
+            })
+        });        
+    </script>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                   markdown
+                </th>
+                <th>
+                    html
+                </th>
+            </tr>    
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <textarea id="markdown2" cols="30" rows="10"></textarea>
+                </td>
+                <td>
+                    <div style="border-style:solid ;border-width: 1px;width:300px;height: 300px;" id="html2"></div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
