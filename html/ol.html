@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <style>
+      @counter-style fixed-decimal {
+        type: alphabetic;
+        glyphs: "0" "1" "2" "3" "4" "5" "6" "7" "8" "9";
+      }
+
+      .ck1 {
+        list-style-type: cjk-ideographic;
+      }
+      .ck2::marker {
+        content: "(" counter(list-item, cjk-ideographic) ")";
+      }
+      .ck2 {
+        margin-left: -10pt;
+      }
+      .ck3 {
+        list-style: fixed-decimal;
+      }
+    </style>
+  </head>
+  <body>
+    <ol>
+      <li class="ck1">item1</li>
+      <li class="ck1">
+        item2
+        <ol>
+          <li class="ck2" style="padding-left: 5pt">
+            疾管署發言人羅一鈞表示，從數字來看，上週新冠重症是4個月來的新高點，且死亡人數亦是10週以來的新高點，目前國內新冠疫情有明顯升溫情形，且是持續的升溫，目前預估會在1月中下旬達到高峰，單日確診人數預估會有1.8萬到2萬人，且農曆春節過後由於人潮流動、燈節活動等，也預估會有另一波高峰，「雙高峰」趨勢明確。
+            <ol>
+              <li class="ck3">item3.1</li>
+            </ol>
+          </li>
+          <li class="ck2">item2.2</li>
+        </ol>
+      </li>
+    </ol>
+  </body>
+</html>

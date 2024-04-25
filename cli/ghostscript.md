@@ -12,7 +12,11 @@
    ```
    forfiles /m *.pdf /c "cmd /c gswin64c -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=output.pdf @file && move /y output.pdf @file" /s
    ```
-5. 壓縮品質參數(由上而下,低至高)
+5. 將沒有副檔名的pdf壓縮
+   ```
+   forfiles /m * /c "cmd /c if @isdir==FALSE if @ext==\"\" gswin64c -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=output.pdf @file && move /y output.pdf @file" /s
+   ```
+6. 壓縮品質參數(由上而下,低至高)
    ```
    -dPDFSETTINGS=/screen
    -dPDFSETTINGS=/ebook
