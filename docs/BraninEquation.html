@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Branin Equation Calculator</title>
+  <style>
+    /* CSS 样式 */
+    /* 可以添加一些样式來美化你的页面 */
+  </style>
+</head>
+<body>
+  <h1>Branin Equation Calculator</h1>
+  <form id="inputForm">
+    <label for="feature1">Feature 1:</label>
+    <input type="number" id="feature1" name="feature1"><br><br>
+    <label for="feature2">Feature 2:</label>
+    <input type="number" id="feature2" name="feature2"><br><br>
+    <button type="button" onclick="calculate()">Calculate</button>
+  </form>
+  <div id="result"></div>
+
+  <script>
+    function calculate() {
+      // 获取用户输入的特征值
+      var feature1 = parseFloat(document.getElementById('feature1').value);
+      var feature2 = parseFloat(document.getElementById('feature2').value);
+
+      // Branin 方程式计算
+      var result = braninEquation(feature1, feature2);
+
+      // 显示结果
+      document.getElementById('result').innerHTML = 'Target value: ' + result.toFixed(2);
+    }
+
+    // Branin 方程式计算函数
+    function braninEquation(x1, x2) {
+      var a = 1;
+      var b = 5.1 / (4 * Math.PI * Math.PI);
+      var c = 5 / Math.PI;
+      var r = 6;
+      var s = 10;
+      var t = 1 / (8 * Math.PI);
+      var result = a * Math.pow(x2 - b * x1 * x1 + c * x1 - r, 2) + s * (1 - t) * Math.cos(x1) + s;
+      return result;
+    }
+  </script>
+</body>
+</html>
