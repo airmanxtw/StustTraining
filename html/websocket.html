@@ -1,7 +1,8 @@
 <html>
     <body>        
         <script>          
-            var ws = new WebSocket("wss://localhost:7275/ws?userid=airmanx&sysname=workflow");
+            //var ws = new WebSocket("wss://localhost:7163/ws?userid=airmanx&sysname=workflow");
+            var ws = new WebSocket("wss://localhost:7163/ws?userid=airmanx&sysname=workflow");
             
             ws.onopen = function() {
                 ws.send("Hello, world");
