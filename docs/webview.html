@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h1>WebView Demo</h1>
+    <p id="webview"></p>
+    <button id="time">GET TIME</button>
+    <script>        
+        window.chrome.webview.addEventListener("message", e => {
+            document.getElementById("webview").innerText = e.data;            
+        });
+        document.getElementById("time").addEventListener("click", () => {
+            window.chrome.webview.postMessage((new Date()).toString());
+        });
+    </script>
+</body>
+
+</html>
