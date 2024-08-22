@@ -2,17 +2,18 @@
     <body>        
         <script>          
             //var ws = new WebSocket("wss://localhost:7163/ws?userid=airmanx&sysname=workflow");
-            var ws = new WebSocket("wss://localhost:7163/ws?userid=airmanx&sysname=workflow");
+            var ws = new WebSocket("wss://localhost:7163/ws?userid=airmanx");
+            var testMsg={Cmd:'test',Target:'airmanx',Data:"hello"};
             
             ws.onopen = function() {
-                ws.send("Hello, world");
+                //ws.send("Hello, world");
             };
             ws.onmessage = function (evt) {
                 alert(evt.data);
             };
 
             const send = () => {
-                ws.send("test!hello");
+                ws.send(JSON.stringify(testMsg));
             }
         </script>
         <button onclick="send()">send</button>
