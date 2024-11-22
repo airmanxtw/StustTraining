@@ -1,6 +1,18 @@
 <html>
-    <body>
-        <h1>test</h1>
-        <img src="https://portal.stust.edu.tw/fileapi/normal/wc/e0f47422-9bc8-4bd9-8f99-1863995e3411.jpg"/>
-    </body>
+  <body>
+    <h1>test</h1>
+    <img src="https://portal.stust.edu.tw/fileapi/normal/wc/e0f47422-9bc8-4bd9-8f99-1863995e3411.jpg" />
+  </body>
+  <script>
+    let doLog = (a) => {
+      console.log(a);
+    };
+
+    let add = (a, b, f) => {
+      f(a + b);
+    };
+
+    add(1, 2, doLog);
+
+  </script>
 </html>
