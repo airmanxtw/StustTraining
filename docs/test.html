@@ -1,9 +1,15 @@
 <html>
   <body>
+    
     <h1>test</h1>    
-    <img src=non_exist onerror=alert(1)>
+    <!-- <img src=non_exist onerror=alert(1)> -->
+    <a onclick="doAlert()" href="https://www.stust.edu.tw">www.stust.edu.tw</a>
+     
   </body>
   <script>
-        
+    function doAlert() {
+      event.preventDefault();
+      alert("You clicked me!");
+    }
   </script>
 </html>
