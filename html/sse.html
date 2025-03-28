@@ -1,0 +1,34 @@
+<html>
+  <body>
+    <script>
+      const sse = new EventSource("https://localhost:5001/data/test/sse2");
+
+      // 監聽 open 事件，當連接成功時會觸發此事件
+      sse.addEventListener("open", function (e) {
+        console.log("SSE connection opened");
+      });
+
+      // 監聽 error 事件，當連接錯誤時會觸發此事件
+      sse.addEventListener("error", function (e) {
+        console.log("SSE connection error");
+      });
+
+      // 監聽 message 事件，當接收到訊息時會觸發此事件
+      sse.addEventListener("message", function (e) {
+        console.log("SSE message received", e);
+
+        const data = JSON.parse(e.data);
+        const messageElement = document.createElement("div");
+        messageElement.textContent = data.message;
+        document.body.appendChild(messageElement);
+      });
+
+      // 監聽自訂的 end 事件
+      sse.addEventListener("end", function (e) {
+        console.log("SSE custon end", e);
+
+        sse.close();
+      });
+    </script>
+  </body>
+</html>
