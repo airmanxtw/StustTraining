@@ -1,6 +1,6 @@
 public class accountApi : IaccountApi
 {
-    
+
 
     // * 轉換表
     private int getval(string c)
@@ -67,5 +67,23 @@ public class accountApi : IaccountApi
         string CheckCode = calcCheckSum(barcodes.GetBarcodes());
         barcodes.barcode3 = barcodes.barcode3.Insert(4, CheckCode);
         return barcodes;
+    }
+}
+
+
+// barcodes.GetBarcodes()
+public class Barcodes
+{
+
+    public string barcode1 { get; set; }
+    public string barcode2 { get; set; }
+    public string barcode3 { get; set; }
+
+    public List<string> GetBarcodes()
+    {
+        return new List<string>()
+            {
+                barcode1,barcode2,barcode3
+            };
     }
 }
