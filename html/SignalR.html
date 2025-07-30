@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.7/signalr.min.js"></script>
+    </head>
+    <body>
+        <script>
+            const connection = new signalR.HubConnectionBuilder()
+                .withUrl("https://localhost:7003/SignalRHub",{ accessTokenFactory: () => '' })
+                .withAutomaticReconnect({ nextRetryDelayInMilliseconds: retryContext => 2000 })
+                .build();
+
+            connection.on("ReceiveMessage", (user, message) => {
+                alert(`${user}: ${message}`);
+            });
+
+            connection.start().then((x) => {
+                console.log(x);
+                debugger;
+                console.log("SignalR connection established.");
+            }).catch(err => {                
+                console.error(err.toString());
+            });
+
+            connection.onreconnecting(() => {
+                console.warn("Reconnecting to SignalR...");
+            });
+
+            connection.onreconnected(() => {
+                console.log("Reconnected to SignalR.");
+            });
+
+            const sendMessage = () => {
+                const user = "airmanx";
+                const message = "Hello from SignalR!";
+                connection.invoke("SendMessage", user, message)
+                    .catch(err => console.error(err.toString()));
+            };
+        </script>
+        <button onclick="sendMessage()">Send Message</button>
+    </body>
+</html>
