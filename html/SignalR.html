@@ -4,8 +4,12 @@
     </head>
     <body>
         <script>
+            // const connection = new signalR.HubConnectionBuilder()
+            //     .withUrl("https://localhost:7003/SignalRHub?test=123",{ accessTokenFactory: () => '' })
+            //     .withAutomaticReconnect({ nextRetryDelayInMilliseconds: retryContext => 2000 })
+            //     .build();
             const connection = new signalR.HubConnectionBuilder()
-                .withUrl("https://localhost:7003/SignalRHub",{ accessTokenFactory: () => '' })
+                .withUrl("https://localhost:7003/Scan2PayHub?storeOrderNo=123abc")
                 .withAutomaticReconnect({ nextRetryDelayInMilliseconds: retryContext => 2000 })
                 .build();
 
