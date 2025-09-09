@@ -9,17 +9,17 @@
             //     .withAutomaticReconnect({ nextRetryDelayInMilliseconds: retryContext => 2000 })
             //     .build();
             const connection = new signalR.HubConnectionBuilder()
-                .withUrl("https://localhost:7003/Scan2PayHub?storeOrderNo=123abc")
-                .withAutomaticReconnect({ nextRetryDelayInMilliseconds: retryContext => 2000 })
-                .build();
+                 .withUrl("https://localhost:7003/Scan2PayHub?sno=20250812133206443147")
+                 .withAutomaticReconnect({ nextRetryDelayInMilliseconds: retryContext => 2000 })
+                 .build(); 
 
-            connection.on("ReceiveMessage", (user, message) => {
-                alert(`${user}: ${message}`);
+           
+
+            connection.on("ReceiveMessage", ( message) => {
+                alert(`${message}`);
             });
 
-            connection.start().then((x) => {
-                console.log(x);
-                debugger;
+            connection.start().then(() => {                                
                 console.log("SignalR connection established.");
             }).catch(err => {                
                 console.error(err.toString());
@@ -36,7 +36,7 @@
             const sendMessage = () => {
                 const user = "airmanx";
                 const message = "Hello from SignalR!";
-                connection.invoke("SendMessage", user, message)
+                connection.invoke("SendCountMessage", user)
                     .catch(err => console.error(err.toString()));
             };
         </script>
