@@ -1,0 +1,25 @@
+<html>
+    <head>
+               
+    </head>
+    <body>
+        
+        <script type="module">
+            import {HelloWorld} from './js/HelloWorld.js'; 
+             import {MyDialog} from './js/MyDialog.0.0.1.js';                  
+        </script>
+
+        <hello-world>
+            <h5>this is slot</h5>
+        </hello-world>
+
+        <my-dialog title="上傳檔案視窗">
+            <h1>upload</h1>
+        </my-dialog>
+
+        <button onclick="document.querySelector('my-dialog').open=true">開啟上傳視窗</button>
+
+
+
+    </body>
+</html>
