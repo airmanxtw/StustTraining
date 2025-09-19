@@ -1,25 +1,68 @@
 <html>
-    <head>
-               
-    </head>
-    <body>
-        
-        <script type="module">
-            import {HelloWorld} from './js/HelloWorld.js'; 
-             import {MyDialog} from './js/MyDialog.0.0.1.js';                  
-        </script>
+  <head> </head>
+  <body>
+    <script type="module">
+      import { HelloWorld } from "./js/HelloWorld.js";
+      import { MyDialog } from "./js/MyDialog.0.0.1.js";
+    </script>
 
-        <hello-world>
-            <h5>this is slot</h5>
-        </hello-world>
+    <hello-world>
+      <h5>this is slot</h5>
+    </hello-world>
 
-        <my-dialog title="上傳檔案視窗">
-            <h1>upload</h1>
-        </my-dialog>
+    <my-dialog title="上傳檔案視窗">
+      <h1>upload</h1>
+    </my-dialog>
 
-        <button onclick="document.querySelector('my-dialog').open=true">開啟上傳視窗</button>
+    <button onclick="document.querySelector('my-dialog').open=true">開啟上傳視窗</button>
 
+    <ol>
+      合約如下:
+      <li contenteditable>
+        <div>甲方</div>
+        <div>乙方</div>
+        <ol>
+          <li contenteditable>丙方</li>
+          <li contenteditable>丁方</li>
+        </ol>
+        <div>xxx</div>
+      </li>
+      <li contenteditable>乙方</li>
+      <li contenteditable>丙方</li>
+    </ol>
+    <button id="ins">新增項目</button>
+    <button id="insinner">新增子項目</button>
+    <button id="del">刪除項目</button>
+    <script>
+      document.querySelectorAll("li[contenteditable]").forEach((li) => {
+        li.addEventListener("keydown", function (event) {
+          if (event.key === "Enter") {
+            event.preventDefault();
+          }
+        });
+      });
 
+      document.getElementById("ins").addEventListener("click", function () {
+        const selectEl = window.getSelection().anchorNode;
+        const insertLi = document.createElement("li");
+        insertLi.contentEditable = true;
+        insertLi.innerHTML = "新項目";
+        selectEl.parentElement.after(insertLi);
+      });
 
-    </body>
+      document.getElementById("insinner").addEventListener("click", function () {
+        const selectEl = window.getSelection().anchorNode;
+        const insertLi = document.createElement("ol");
+        insertLi.innerHTML = "<li contenteditable>子項目</li>";
+        selectEl.parentElement.append(insertLi);
+      });
+
+      document.getElementById("del").addEventListener("click", function () {
+        const selectEl = window.getSelection().anchorNode;
+        if (selectEl.parentElement.parentElement.tagName === "OL") {
+          selectEl.parentElement.remove();
+        }
+      });
+    </script>
+  </body>
 </html>

@@ -25,7 +25,7 @@ export class MyDialog extends LitElement {
             <div style='width:100%;text-align:right'>
                 <input @click=${this._closeDialog} type="button" value="關閉上傳視窗" />
             </div>
-        </dialog>    
+        </dialog>            
     `;
   }
 
