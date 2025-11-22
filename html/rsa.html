@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/jsencrypt@latest/bin/jsencrypt.min.js"></script>
+  </head>
+  <body>
+    <script>
+      const crypt = new JSEncrypt();
+      crypt.setPublicKey(`-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCUhIPT/S9E7sNIhDOMT6o6kfR+
+2TeXKD/ZsgmCFpUxX6EscjZTJ34l6p4RWDn8gJqyu3iOrTa/kKBdfysotsasOnPM
+7VzZZvaRfhF1AEagkN9TpTCA5zMLbvOpRlUg/T0I48limeKfh+qVPyHngw9vOOss
+8tuUcHTjcveQyhaQAwIDAQAB
+-----END PUBLIC KEY-----`);
+
+      const encrypted = crypt.encrypt("hello");
+      console.log("Encrypted:", encrypted);
+    </script>
+  </body>
+</html>
+
+Kyi2xqw6c8ztXNlm9pF+EXUARqCQ31OlMIDnMwtu86lGVSD9PQjjyWKZ4p+H6pU/
+IeeDD2846yzy25RwdONy95DKFpADAgMBAAECgYAqfQKt2gf0442wqEmLAZuEqA7X
+X1M9BkHGCN4ZflZuSpp0ebQ689huBoH0GlZ0e2JGccWao8k+4qROOzxgqHGLkYex
+Y5SHsSPBzW8DGws7u9cN07xl5lh4TjiUP+eznzwRUrBT7O13DzR1fSfpAfL0JdH6
+Q0Ke1I5RjjVjwDFZKQJBAN/YS4aQUtyR/CHzc/B/v+Roi3pSc9IfWz2vLk36pneK
+Q8GBe1PcZDg5YvTFMGJtvBxA3HyoBnVqrABf8/EuSh8CQQCp2h/FczJsJJ1tQW3X
+v+dIABP6SH1O/g0jzmFEPk2WbcS6RN0jg+Pji4Bzmws9CFl9Y5JMYW5XfVGdgfi3
+r4WdAkEAlDfBUrnP1DNp8wUkGPROGKzM5lMgU9rlbIPJsmKsxWytDr1w7wd46O2+
+w3qqXhJxQ3gDRxtvI2Jdv+XJPkK7WwJAP8luzRQqB3rotDMyMSgcj2mYFxJKHPRD
+swK6fIp5UNkAXIOoGMJbPwUQxFmhqtYL5Y8TTiP48Fpb4C8DXNhJ8QJAAfBPjmx1
+NDNMoZEAihkfv+Box/Km3/N2XHI/bDqmlP5BJryXpEVh4/pEpmhytfgj0Iyc0Gi2
+yA2Ob/NPKcVZ8w==
+-----END PRIVATE KEY-----`);
+
+      const encrypted = crypt.encrypt("hello");
+      console.log("Encrypted:", encrypted);
+    </script>
+  </body>
+</html>

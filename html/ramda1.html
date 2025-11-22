@@ -12,7 +12,11 @@
 
       document.getElementById("val").innerHTML = fun1;
 
-      
+      const getState = (score) =>
+        R.pipe(Math.sqrt, R.multiply(R.__, 2), R.ifElse(R.gte(R.__, 60), R.always("及格"), R.always("不及格")))(score);
+
+      console.log(getState(50)); // "及格"
+      console.log(getState(20)); // "不及格"
     </script>
   </body>
 </html>
