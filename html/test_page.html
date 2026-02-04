@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test</title>
+</head>
+<body>
+    <h1 style="color: red">我是顏大鈞</h1>
+    <h2>我是顏海芸</h2>
+    
+    <button onclick="alert('hello')">Click Me</button>
+    
+    <div id="status" style="margin-top: 20px; padding: 10px; background-color: #f0f0f0;">
+        Status: Waiting for button click...
+    </div>
+    
+    <script>
+        // Remove the auto-alert for testing
+        // alert(100 + 25 - 6);
+        
+        // Add event listener to button to update status
+        document.querySelector('button').addEventListener('click', function() {
+            document.getElementById('status').innerText = 'Status: Button clicked! Alert should appear.';
+        });
+    </script>
+</body>
+</html>
