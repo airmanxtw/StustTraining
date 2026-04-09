@@ -1,3 +1,5 @@
+// This code demonstrates the use of fold, reduce, and scan functions in F# to process a list of students and their scores.
+
 type Student ={
     No : int
     Name : string
