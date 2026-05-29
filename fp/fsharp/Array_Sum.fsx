@@ -2,6 +2,7 @@
 #r "nuget:FSharpPlus"
 
 open FSharpPlus
+open FSharpPlus.Data
 let rec sum1 data =
     match data with
     | [] -> 0
@@ -22,4 +23,3 @@ printf "The sum of [1; 2; 3] is %d\n" (sum2 [ 1; 2; 3 ])
 
 [1;2;3] |> bind (fun i -> [i; i*2])
 |> printfn "The bind of [1; 2; 3] is %A"
-
