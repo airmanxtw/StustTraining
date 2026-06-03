@@ -10,3 +10,9 @@ let f1 =
     |> map (fun j -> j * 2)
 
 printfn "Result: %A" (f1 5)
+
+let data = [ (1, "one"); (2, "two"); (3, "three") ]
+
+let f2 = data |> unzip
+
+printfn "Unzipped: %A" f2
