@@ -12,3 +12,14 @@ and Dept =
 
 
 let d1 = Students [ Name "Alice"; Nickname "Ally"; Info(20, 3) ]
+
+
+let add = (*) 2
+
+printf "The double of 5 is %d\n" (add 5)
+
+
+
+
+
+
