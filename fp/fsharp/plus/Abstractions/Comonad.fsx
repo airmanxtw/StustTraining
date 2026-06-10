@@ -20,3 +20,9 @@ let z = (10, "a")
 let zresult = duplicate z
 
 printfn "%A" zresult
+
+let r1 = Reader(fun (x: int) -> x + 1)
+
+let r2 = extract r1
+
+printfn "%A" r2
