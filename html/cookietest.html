@@ -34,6 +34,16 @@
             cursor: pointer;
         }
 
+        .button-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        #logoutBtn {
+            background: #dc2626;
+        }
+
         button:disabled {
             background: #93c5fd;
             cursor: not-allowed;
@@ -82,14 +92,19 @@
         <p>點擊按鈕後，會將以下資料 POST 到 <code>https://localhost:7194/</code>：</p>
         <p><code>{ userid: 'test', password: '12345' }</code></p>
 
-        <button id="sendBtn" type="button">送出登入請求</button>
+        <div class="button-group">
+            <button id="sendBtn" type="button">送出登入請求</button>
+            <button id="logoutBtn" type="button">登出</button>
+        </div>
 
         <div id="result" class="status"></div>
     </div>
 
     <script>
         const sendBtn = document.getElementById('sendBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
         const result = document.getElementById('result');
+        let authToken = '';
 
         function showMessage(type, message) {
             result.className = 'status ' + type;
@@ -106,8 +121,9 @@
             showMessage('info', '請求中...');
 
             try {
-                const response = await fetch('https://localhost:7194/', {
+                const response = await fetch('https://localhost:7194/login', {
                     method: 'POST',
+                    credentials: 'include',
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -116,17 +132,68 @@
 
                 const text = await response.text();
 
-                if (response.status === 202) {
+                if (response.status === 200) {
+                    let token = text.trim();
+
+                    try {                        
+                        const json = JSON.parse(text);
+                        token = json;
+                    } catch {
+                        // Keep plain text token when response body is not JSON.
+                    }
+
+                    authToken = token;
+                    debugger;
+                    //logoutBtn.disabled = !authToken;
                     showMessage('success', '成功取得 token：\n' + text);
                 } else if (response.status === 401) {
+                    authToken = '';
+                    //logoutBtn.disabled = true;
                     showMessage('error', '登入失敗：\n' + text);
                 } else {
+                    authToken = '';
+                    //logoutBtn.disabled = true;
                     showMessage('error', '發生未預期的錯誤。\n狀態碼：' + response.status + '\n訊息：' + text);
+                }
+            } catch (error) {
+                authToken = '';
+                //logoutBtn.disabled = true;
+                showMessage('error', '無法連線到伺服器：\n' + error.message);
+            } finally {
+                sendBtn.disabled = false;
+            }
+        });
+
+        logoutBtn.addEventListener('click', async function () {
+            if (!authToken) {
+                showMessage('error', '目前沒有可用的 token，請先登入。');
+                return;
+            }
+            
+            showMessage('info', '登出請求中...');
+
+            try {
+                debugger;
+                const response = await fetch('https://localhost:7194/logout', {
+                    method: 'GET',
+                    credentials: 'include',
+                    headers: {
+                        Authorization: 'Bearer ' + authToken
+                    }
+                });
+
+                const text = await response.text();
+                debugger;
+                if (response.ok) {
+                    authToken = '';
+                    showMessage('success', '登出成功：\n' + text);
+                } else {
+                    showMessage('error', '登出失敗。\n狀態碼：' + response.status + '\n訊息：' + text);
                 }
             } catch (error) {
                 showMessage('error', '無法連線到伺服器：\n' + error.message);
             } finally {
-                sendBtn.disabled = false;
+                //logoutBtn.disabled = !authToken;
             }
         });
     </script>
