@@ -44,6 +44,10 @@
             background: #dc2626;
         }
 
+        #refreshBtn {
+            background: #d97706;
+        }
+
         button:disabled {
             background: #93c5fd;
             cursor: not-allowed;
@@ -94,6 +98,7 @@
 
         <div class="button-group">
             <button id="sendBtn" type="button">送出登入請求</button>
+            <button id="refreshBtn" type="button">刷token</button>
             <button id="logoutBtn" type="button">登出</button>
         </div>
 
@@ -102,6 +107,7 @@
 
     <script>
         const sendBtn = document.getElementById('sendBtn');
+        const refreshBtn = document.getElementById('refreshBtn');
         const logoutBtn = document.getElementById('logoutBtn');
         const result = document.getElementById('result');
         let authToken = '';
@@ -161,6 +167,45 @@
                 showMessage('error', '無法連線到伺服器：\n' + error.message);
             } finally {
                 sendBtn.disabled = false;
+            }
+        });
+
+        refreshBtn.addEventListener('click', async function () {
+            if (!authToken) {
+                showMessage('error', '目前沒有可用的 token，請先登入。');
+                return;
+            }
+
+            showMessage('info', '刷 token 請求中...');
+
+            try {
+                const response = await fetch('https://localhost:7194/refreshtoken', {
+                    method: 'GET',
+                    credentials: 'include',
+                    headers: {
+                        Authorization: 'Bearer ' + authToken
+                    }
+                });
+
+                const text = await response.text();
+
+                if (response.ok) {
+                    let token = text.trim();
+
+                    try {
+                        const json = JSON.parse(text);
+                        token = json;
+                    } catch {
+                        // Keep plain text token when response body is not JSON.
+                    }
+
+                    authToken = token;
+                    showMessage('success', '刷 token 成功，已取得新 token：\n' + text);
+                } else {
+                    showMessage('error', '刷 token 失敗。\n狀態碼：' + response.status + '\n訊息：' + text);
+                }
+            } catch (error) {
+                showMessage('error', '無法連線到伺服器：\n' + error.message);
             }
         });
 
