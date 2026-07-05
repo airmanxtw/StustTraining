@@ -8,8 +8,10 @@
       let b = immer.produce(a, (draft) => {
         draft[2] = 4;
       });
+      let c = immer.produce(a, (draft) => {});
       console.log(a); // [1, 2, 3]
       console.log(b); // [1, 2, 4]
+      console.log(c); // [1, 2, 3]
     </script>
   </body>
 </html>
