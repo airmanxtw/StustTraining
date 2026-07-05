@@ -63,3 +63,5 @@ let class1 =
 printfn "change student name: %A" (setl (_class "002" << _studentName) "Bobby" class1)
 
 printfn "get student name: %A" (view (_class "003" << _studentName) class1)
+
+printfn "upper case student name: %A" (over (_class "001" << _studentName) (fun name -> name.ToUpper()) class1)
