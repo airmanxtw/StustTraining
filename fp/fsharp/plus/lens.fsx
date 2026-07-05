@@ -61,3 +61,5 @@ let class1 =
           { no = "003"; name = "Charlie" } ] }
 
 printfn "change student name: %A" (setl (_class "002" << _studentName) "Bobby" class1)
+
+printfn "get student name: %A" (view (_class "003" << _studentName) class1)
