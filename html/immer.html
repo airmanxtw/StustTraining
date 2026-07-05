@@ -1,0 +1,15 @@
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/immer@9.0.21/dist/immer.umd.production.min.js"></script>
+  </head>
+  <body>
+    <script>
+      let a = [1, 2, 3];
+      let b = immer.produce(a, (draft) => {
+        draft[2] = 4;
+      });
+      console.log(a); // [1, 2, 3]
+      console.log(b); // [1, 2, 4]
+    </script>
+  </body>
+</html>
