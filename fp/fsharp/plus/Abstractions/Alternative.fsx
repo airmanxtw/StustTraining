@@ -13,3 +13,11 @@ printfn "Result: %A" result
 
 
 let v3 = empty<int option>
+
+let vs =
+    seq {
+        v1 ()
+        v2 ()
+    }
+
+let result2 = mfilter (fun x -> x > 0) (Some 1)
