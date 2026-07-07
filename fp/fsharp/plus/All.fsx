@@ -3,9 +3,9 @@
 open FSharpPlus
 open FSharpPlus.Data
 
-let data = [ 1; 2; 3; 4; 5 ]
+let data = [ 1; 2; 3; 4; 5; -1 ]
 
-let result = All true
+let result = data |> List.map (fun x -> All(x > 0)) |> sum
 
 let (All b) = result
 
