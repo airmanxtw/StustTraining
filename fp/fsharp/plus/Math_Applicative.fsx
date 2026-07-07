@@ -32,3 +32,9 @@ let w = Vector.Build.DenseOfArray [| 2; -1 |]
 let z = 2.0 * v - 3.0 * w
 
 printfn "2v - 3w: %A" z
+
+
+let o1 = Some 1
+let o2 = Some 2
+
+let oResult = plus o1 o2
