@@ -26,3 +26,10 @@ let r1 = Reader(fun (x: int) -> x + 1)
 let r2 = extract r1
 
 printfn "%A" r2
+
+let r3 = Reader(fun (x: int) -> x + 1)
+let d1 = duplicate r3
+
+let d2 = d1 |> Reader.run <| 10 |> Reader.run <| 20
+
+printfn "d2: %A" d2
