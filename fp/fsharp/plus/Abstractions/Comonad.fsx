@@ -33,3 +33,9 @@ let d1 = duplicate r3
 let d2 = d1 |> Reader.run <| 10 |> Reader.run <| 20
 
 printfn "d2: %A" d2
+
+
+let m1 x = x + 1
+let el1 = duplicate m1
+
+printfn "el1: %A" (el1 10)
