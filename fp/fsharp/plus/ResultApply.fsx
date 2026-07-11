@@ -15,3 +15,5 @@ let doubleValue () =
 let result = Result.apply (doubleValue ()) (plusOne 5)
 
 printfn "Result: %A" (Result.get result)
+
+let result2 = (fun i j -> i + j) <!> plusOne 3 <*> plusOne 4
