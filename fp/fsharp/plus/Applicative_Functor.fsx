@@ -13,5 +13,13 @@ f1 <*> v1
     | Some result -> printf "The result is %d\n" result
     | None -> printf "No result\n"
 
+let a1 =
+    applicative {
+        let! x = Some 5
+        and! y = None
+        return x + y
+    }
 
-
+match a1 with
+| Some result -> printf "The result is %d\n" result
+| None -> printf "No result\n"
