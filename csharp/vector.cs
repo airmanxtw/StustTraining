@@ -2,12 +2,12 @@
 
 using System.Numerics;
 
-static Vector2 Resize(Vector2 im, Vector2 target, float scale)
+static Vector2 Resize(Vector2 image, Vector2 target, float scale)
 {
-    // Dot example: [2,3] . [1,0] = 2*1 + 3*0 = 2
-    var v = Vector2.Dot(im, target);
-    var newVector = im / new Vector2(v, v) * new Vector2(scale, scale);
-    return newVector;
+    // 點積範例: [2,3] . [1,0] = 2*1 + 3*0 = 2
+    // 用來找出目標向量
+    var v = Vector2.Dot(image, target);
+    return image / new Vector2(v, v) * new Vector2(scale, scale);
 }
 
 // 目標是寬800，高600的影像，將其縮放到寬度為500的大小
