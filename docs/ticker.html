@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+  </head>
+  <body>
+    <div id="news"></div>
+  </body>
+  <script>
+    var news = "hello world! this is a test news ticker.   ";
+    const asciiCodes = Array.from(news, (char) => char.charCodeAt(0));
+
+    // 將 ASCII 代碼轉換為 TensorFlow 張量
+    let newsVector = tf.tensor1d(asciiCodes, "int32");
+    const length = newsVector.shape[0];
+    const positions = Array.from({ length }, (_, index) => (index + 1) % length);
+
+    // 取得轉置矩陣
+    const shiftMatrix = tf.oneHot(tf.tensor1d(positions, "int32"), length);
+
+    setInterval(() => {
+      // 將新聞向量與轉置矩陣相乘，實現滾動效果
+      const shiftedVector = tf.matMul(newsVector.reshape([1, length]), shiftMatrix).reshape([length]);
+      const shiefteNews = String.fromCharCode(...shiftedVector.arraySync());
+      document.getElementById("news").textContent = shiefteNews;
+      newsVector = shiftedVector;
+    }, 200);
+  </script>
+</html>
