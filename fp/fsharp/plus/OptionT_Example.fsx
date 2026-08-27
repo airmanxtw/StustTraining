@@ -11,7 +11,10 @@ module OptionTExample =
 
 
     let result () =
-        let t = OptionT(add 5 10)
+        let t =
+            OptionT(add 5 10)
+            |> OptionT.map (fun x -> x * 2)
+            |> OptionT.map (fun x -> x + 1)
 
         let t2 =
             monad {
