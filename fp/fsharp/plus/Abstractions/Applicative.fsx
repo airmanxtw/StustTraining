@@ -17,3 +17,10 @@ printfn "Result1: %A" result1
 
 let result2 = (fun x y -> x + y) <!> data1 <.> data2
 printfn "Result2: %A" result2
+
+
+let t1: Option<int> = result 10
+let t2: Option<int> = result 20
+
+let result3 = lift2 (fun x y -> x + y) t1 t2
+printfn "Result3: %A" result3
