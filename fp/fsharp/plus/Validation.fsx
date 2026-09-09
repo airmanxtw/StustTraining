@@ -37,3 +37,25 @@ match result with
     the following errors:"
 
     errors |> List.iter (printfn "%A")
+
+let blank (s:string) =
+    if s.Length > 0 then
+        Success s
+    else
+        Failure ["String is empty"]
+
+let email (s:string)=
+    if not (s.Contains("@")) then
+        Failure ["Email is too short"] // Example validation, adjust as needed
+    else
+        Success s
+
+let v0 = blank "" <* email ""
+
+let vs = [ blank; email ]
+let vs2 = vs |> List.fold (fun acc f -> acc <* f "") (Success "")
+
+vs2
+|> function
+    | Success s -> printfn "Validation succeeded: %s" s
+    | Failure errors -> printfn "Validation failed: %A" errors
