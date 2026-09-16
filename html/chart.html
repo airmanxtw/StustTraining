@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>收入統計表</title>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <style>
+            body {
+                margin: 0;
+                padding: 24px;
+                background-color: #f5f7fa;
+                font-family: "Microsoft JhengHei", sans-serif;
+            }
+
+            .chart-container {
+                width: min(100%, 1100px);
+                height: 560px;
+                margin: 0 auto;
+                padding: 24px;
+                box-sizing: border-box;
+                background-color: #ffffff;
+                border: 1px solid #d9dee7;
+            }
+
+            @media (max-width: 640px) {
+                body {
+                    padding: 12px;
+                }
+
+                .chart-container {
+                    height: 480px;
+                    padding: 12px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <main class="chart-container">
+            <canvas id="myChart"></canvas>
+        </main>
+
+        <script>
+            
+
+
+            const incomeRecords = [
+                { category: "薪資收入", GrantDate: "2024-01-05", TradeAmount: 52000 },
+                { category: "獎金收入", GrantDate: "2024-01-20", TradeAmount: 8000 },
+                { category: "其他收入", GrantDate: "2024-01-28", TradeAmount: 3000 },
+                { category: "薪資收入", GrantDate: "2024-02-05", TradeAmount: 52000 },
+                { category: "獎金收入", GrantDate: "2024-02-20", TradeAmount: 5000 },
+                { category: "其他收入", GrantDate: "2024-02-26", TradeAmount: 4500 },
+                { category: "薪資收入", GrantDate: "2024-03-05", TradeAmount: 54000 },
+                { category: "獎金收入", GrantDate: "2024-03-18", TradeAmount: 12000 },
+                { category: "其他收入", GrantDate: "2024-03-25", TradeAmount: 2000 },
+                { category: "薪資收入", GrantDate: "2024-04-05", TradeAmount: 54000 },
+                { category: "獎金收入", GrantDate: "2024-04-19", TradeAmount: 6000 },
+                { category: "其他收入", GrantDate: "2024-04-27", TradeAmount: 3500 },
+                { category: "薪資收入", GrantDate: "2024-05-05", TradeAmount: 54000 },
+                { category: "獎金收入", GrantDate: "2024-05-20", TradeAmount: 9000 },
+                { category: "其他收入", GrantDate: "2024-05-28", TradeAmount: 5000 },
+                { category: "薪資收入", GrantDate: "2024-06-05", TradeAmount: 56000 },
+                { category: "獎金收入", GrantDate: "2024-06-18", TradeAmount: 15000 },
+                { category: "其他收入", GrantDate: "2024-06-26", TradeAmount: 4000 },
+                { category: "薪資收入", GrantDate: "2024-07-05", TradeAmount: 56000 },
+                { category: "獎金收入", GrantDate: "2024-07-19", TradeAmount: 7000 },
+                { category: "其他收入", GrantDate: "2024-07-28", TradeAmount: 6500 },
+                { category: "薪資收入", GrantDate: "2024-08-05", TradeAmount: 56000 },
+                { category: "獎金收入", GrantDate: "2024-08-20", TradeAmount: 10000 },
+                { category: "其他收入", GrantDate: "2024-08-27", TradeAmount: 3000 },
+                { category: "薪資收入", GrantDate: "2024-09-05", TradeAmount: 58000 },
+                { category: "獎金收入", GrantDate: "2024-09-18", TradeAmount: 8000 },
+                { category: "其他收入", GrantDate: "2024-09-25", TradeAmount: 5500 },
+                { category: "薪資收入", GrantDate: "2024-10-05", TradeAmount: 58000 },
+                { category: "獎金收入", GrantDate: "2024-10-20", TradeAmount: 11000 },
+                { category: "其他收入", GrantDate: "2024-10-28", TradeAmount: 7000 },
+                { category: "薪資收入", GrantDate: "2024-11-05", TradeAmount: 58000 },
+                { category: "獎金收入", GrantDate: "2024-11-19", TradeAmount: 9000 },
+                { category: "其他收入", GrantDate: "2024-11-26", TradeAmount: 4500 },
+                { category: "薪資收入", GrantDate: "2024-12-05", TradeAmount: 60000 },
+                { category: "獎金收入", GrantDate: "2024-12-20", TradeAmount: 20000 },
+                { category: "其他收入", GrantDate: "2024-12-28", TradeAmount: 8000 }
+            ];
+
+            const monthLabels = [
+                "一月", "二月", "三月", "四月", "五月", "六月",
+                "七月", "八月", "九月", "十月", "十一月", "十二月"
+            ];
+            
+            const categories = ["薪資收入", "獎金收入", "其他收入"];
+            const categoryColors = {
+                "薪資收入": "#2878b5",
+                "獎金收入": "#e69f00",
+                "其他收入": "#3a9d5d",
+                "宿舍冰箱租用": "#ff6347"
+            };
+            const monthlyIncome = Object.fromEntries(
+                categories.map(category => [category, Array(12).fill(0)])
+            );
+
+            incomeRecords.forEach(record => {
+                const monthIndex = Number(record.GrantDate.split("-")[1]) - 1;
+                monthlyIncome[record.category][monthIndex] += record.TradeAmount;
+            });
+
+            const currencyFormatter = new Intl.NumberFormat("zh-TW");
+            const datasets = categories.map(category => ({
+                label: category,
+                data: monthlyIncome[category],
+                backgroundColor: categoryColors[category]
+            }));
+
+            new Chart(document.getElementById("myChart"), {
+                type: "bar",
+                data: {
+                    labels: monthLabels,
+                    datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: "收入統計表",
+                            font: {
+                                size: 24
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: context => `${context.dataset.label}：新台幣 ${currencyFormatter.format(context.parsed.y)} 元`
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            stacked: true,
+                            title: {
+                                display: true,
+                                text: "月份"
+                            }
+                        },
+                        y: {
+                            stacked: true,
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: "新台幣金額"
+                            },
+                            ticks: {
+                                callback: value => `新台幣 ${currencyFormatter.format(value)} 元`
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Web Crypto API 範例</title>
+		<style>
+			:root {
+				color-scheme: light;
+				--ink: #18231f;
+				--muted: #64706b;
+				--paper: #f6f4ed;
+				--surface: #fffdf7;
+				--line: #d7d8cf;
+				--accent: #087f5b;
+				--accent-dark: #056143;
+				--success: #176b43;
+				--error: #b42318;
+			}
+
+			* {
+				box-sizing: border-box;
+			}
+
+			body {
+				min-height: 100vh;
+				margin: 0;
+				color: var(--ink);
+				background:
+					linear-gradient(rgba(24, 35, 31, 0.045) 1px, transparent 1px),
+					linear-gradient(90deg, rgba(24, 35, 31, 0.045) 1px, transparent 1px),
+					var(--paper);
+				background-size: 28px 28px;
+				font-family: Georgia, "Times New Roman", serif;
+			}
+
+			main {
+				width: min(880px, calc(100% - 32px));
+				margin: 0 auto;
+				padding: 56px 0 72px;
+			}
+
+			header {
+				margin-bottom: 32px;
+				border-bottom: 2px solid var(--ink);
+			}
+
+			h1 {
+				margin: 0 0 12px;
+				font-size: clamp(2rem, 7vw, 4rem);
+				line-height: 1;
+				letter-spacing: 0;
+			}
+
+			header p {
+				max-width: 650px;
+				margin: 0 0 24px;
+				color: var(--muted);
+				font-family: "Segoe UI", sans-serif;
+				line-height: 1.7;
+			}
+
+			.controls {
+				display: grid;
+				grid-template-columns: 1fr 1fr auto;
+				gap: 16px;
+				align-items: end;
+				padding-bottom: 32px;
+			}
+
+			label {
+				display: grid;
+				gap: 8px;
+				color: var(--muted);
+				font-family: "Segoe UI", sans-serif;
+				font-size: 0.85rem;
+				font-weight: 700;
+			}
+
+			input {
+				width: 100%;
+				min-height: 44px;
+				border: 1px solid var(--line);
+				border-radius: 4px;
+				padding: 10px 12px;
+				color: var(--ink);
+				background: var(--surface);
+				font: 1rem Consolas, monospace;
+			}
+
+			input:focus {
+				border-color: var(--accent);
+				outline: 3px solid rgba(8, 127, 91, 0.15);
+			}
+
+			button {
+				min-height: 44px;
+				border: 0;
+				border-radius: 4px;
+				padding: 0 20px;
+				color: white;
+				background: var(--accent);
+				font: 700 0.95rem "Segoe UI", sans-serif;
+				cursor: pointer;
+			}
+
+			button:hover {
+				background: var(--accent-dark);
+			}
+
+			button:disabled {
+				cursor: wait;
+				opacity: 0.65;
+			}
+
+			.results {
+				display: grid;
+				border-top: 1px solid var(--line);
+			}
+
+			.result {
+				display: grid;
+				grid-template-columns: 150px minmax(0, 1fr);
+				gap: 20px;
+				padding: 20px 0;
+				border-bottom: 1px solid var(--line);
+			}
+
+			.result dt {
+				color: var(--muted);
+				font-family: "Segoe UI", sans-serif;
+				font-size: 0.85rem;
+				font-weight: 700;
+			}
+
+			.result dd {
+				min-width: 0;
+				margin: 0;
+				overflow-wrap: anywhere;
+				font: 0.95rem/1.6 Consolas, monospace;
+			}
+
+			#status[data-state="success"] {
+				color: var(--success);
+			}
+
+			#status[data-state="error"] {
+				color: var(--error);
+			}
+
+			@media (max-width: 680px) {
+				main {
+					padding-top: 32px;
+				}
+
+				.controls,
+				.result {
+					grid-template-columns: 1fr;
+				}
+
+				.result {
+					gap: 6px;
+				}
+
+				button {
+					width: 100%;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<header>
+				<h1>Web Crypto API</h1>
+				<p>用 PBKDF2 將密碼衍生成 AES-GCM 金鑰，再依序加密與解密文字。</p>
+			</header>
+
+			<section class="controls" aria-label="加密設定">
+				<label>
+					密碼
+					<input id="password" type="password" value="12345" autocomplete="current-password" />
+				</label>
+				<label>
+					原始文字
+					<input id="plainText" type="text" value="hello world" />
+				</label>
+				<button id="runButton" type="button">執行加解密</button>
+			</section>
+
+			<dl class="results" aria-live="polite">
+				<div class="result">
+					<dt>PBKDF2 salt</dt>
+					<dd id="salt">尚未執行</dd>
+				</div>
+				<div class="result">
+					<dt>AES-GCM IV</dt>
+					<dd id="iv">尚未執行</dd>
+				</div>
+				<div class="result">
+					<dt>加密結果</dt>
+					<dd id="cipherText">尚未執行</dd>
+				</div>
+				<div class="result">
+					<dt>解密結果</dt>
+					<dd id="decryptedText">尚未執行</dd>
+				</div>
+				<div class="result">
+					<dt>狀態</dt>
+					<dd id="status">等待執行</dd>
+				</div>
+			</dl>
+		</main>
+
+		<script>
+			const encoder = new TextEncoder();
+			const decoder = new TextDecoder();
+			const passwordInput = document.querySelector("#password");
+			const plainTextInput = document.querySelector("#plainText");
+			const runButton = document.querySelector("#runButton");
+			const saltOutput = document.querySelector("#salt");
+			const ivOutput = document.querySelector("#iv");
+			const cipherTextOutput = document.querySelector("#cipherText");
+			const decryptedTextOutput = document.querySelector("#decryptedText");
+			const statusOutput = document.querySelector("#status");
+
+			function bytesToHex(bytes) {
+				return Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join("");
+			}
+
+			function arrayBufferToBase64(buffer) {
+				const bytes = new Uint8Array(buffer);
+				let binary = "";
+
+				for (const byte of bytes) {
+					binary += String.fromCharCode(byte);
+				}
+
+				return btoa(binary);
+			}
+
+			async function deriveAesKey(password, salt) {
+				const passwordKey = await crypto.subtle.importKey(
+					"raw",
+					encoder.encode(password),
+					"PBKDF2",
+					false,
+					["deriveKey"]
+				);
+
+				return crypto.subtle.deriveKey(
+					{
+						name: "PBKDF2",
+						salt,
+						iterations: 250000,
+						hash: "SHA-256"
+					},
+					passwordKey,
+					{ name: "AES-GCM", length: 256 },
+					false,
+					["encrypt", "decrypt"]
+				);
+			}
+
+			async function runCryptoExample() {
+				if (!window.crypto?.subtle) {
+					throw new Error("此瀏覽器或目前連線環境不支援 Web Crypto API。");
+				}
+
+				const password = passwordInput.value;
+				const plainText = plainTextInput.value;
+
+				if (!password) {
+					throw new Error("請輸入密碼。");
+				}
+
+				const salt = crypto.getRandomValues(new Uint8Array(16));
+				const iv = crypto.getRandomValues(new Uint8Array(12));
+				const aesKey = await deriveAesKey(password, salt);
+
+				const encryptedBuffer = await crypto.subtle.encrypt(
+					{ name: "AES-GCM", iv },
+					aesKey,
+					encoder.encode(plainText)
+				);
+
+				const decryptedBuffer = await crypto.subtle.decrypt(
+					{ name: "AES-GCM", iv },
+					aesKey,
+					encryptedBuffer
+				);
+				const decryptedText = decoder.decode(decryptedBuffer);
+
+				saltOutput.textContent = bytesToHex(salt);
+				ivOutput.textContent = bytesToHex(iv);
+				cipherTextOutput.textContent = arrayBufferToBase64(encryptedBuffer);
+				decryptedTextOutput.textContent = decryptedText;
+
+				if (decryptedText !== plainText) {
+					throw new Error("解密結果與原始文字不同。");
+				}
+			}
+
+			runButton.addEventListener("click", async () => {
+				runButton.disabled = true;
+				statusOutput.dataset.state = "";
+				statusOutput.textContent = "處理中...";
+
+				try {
+					await runCryptoExample();
+					statusOutput.dataset.state = "success";
+					statusOutput.textContent = "成功：解密結果與原始文字相同";
+				} catch (error) {
+					console.error(error);
+					statusOutput.dataset.state = "error";
+					statusOutput.textContent = `失敗：${error.message}`;
+				} finally {
+					runButton.disabled = false;
+				}
+			});
+		</script>
+	</body>
+</html>
