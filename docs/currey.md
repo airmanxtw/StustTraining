@@ -31,3 +31,21 @@
     public Func<int,int> tpl(int x) => mutiply(3);
 ```
 
+4. 補充
+```javascript
+    # javascript
+
+    let isValidHeight = min => max => height => (height>=min && height<=max)
+
+    // 人類身高判斷器
+    let isValidHumanHeight = height => isValidHeight(80)(250);
+
+    // 狗狗高度判斷器
+    let isValidDogHeight = height => isValidHeight(30)(120);
+
+    // example
+    console.log(`高160公分的人類,身高是否合理:${isValidHumanHeight(160)}`);
+    console.log(`高200公分的狗狗,高度是否合理:${isValidDogHeight(200)}`);
+
+```
+
