@@ -19,7 +19,13 @@
       </svg>
     <script>
         document.querySelector('#svelte-title').$on('add2', (e) => { console.log(e) })
+    let mutiply = x => y => x*y;
+    let double = mutiply(2);
+    let triple = mutiply(3);
 
+    // example
+    console.log(`5的倍數為:${double(5)}`);
+    console.log(`9的三倍數為:${triple(9)}`);
         
     </script>
 </body>

@@ -1,0 +1,33 @@
+# 有關乘數與被乘數的討論 : https://parents.hsin-yi.org.tw/Forum/Topic/20/Discuss/Detail/414
+1. 在一般C#的函數中,兩數什麼位置好像都沒什麼關係,功能一樣可以用:
+``` csharp
+    // c#
+    public int multiply(int x,int y) => x*y;
+    // or
+    public int multiply(int y,int x) => x*y;
+```
+2. 但如果你的函數考慮了柯里化,前後位置在定義上就會不一樣:
+```javascript
+    // javascript
+    let multiply = x => y => x*y;
+    let double = multiply(2);
+    let triple = multiply(3);
+
+    // example
+    console.log(`5的倍數為:${double(5)}`);
+    console.log(`9的三倍數為:${triple(9)}`);
+```
+
+3. 那c#可不可以柯里化?可以,醜,心智負擔大
+``` csharp
+    // c#
+    public static Func<int,Func<int,int>> multiply = x => y => x * y;
+    public Func<int,Func<int,int>> dbl = x => multiply(2);
+    public Func<int,Func<int,int>> tpl = x => multiply(3); 
+
+    //or 
+    public static Func<int,int> mutiply(int x) => y => x * y;
+    public Func<int,int> dbl(int x) => mutiply(2);
+    public Func<int,int> tpl(int x) => mutiply(3);
+```
+
