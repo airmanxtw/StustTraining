@@ -26,3 +26,12 @@ let data2Result3 = (<!>) (fun y -> y * 3) ((<!>) (fun x -> x - 1) data2)
 printfn "Data2 Result1: %A" data2Result1
 printfn "Data2 Result2: %A" data2Result2
 printfn "Data2 Result3: %A" data2Result3
+
+let rule1 = (|>>) data2 id = id data2
+printfn "Rule1: %A" rule1
+
+let rule2 = (|>>) data2 ((fun x -> x * 2) << fun y -> y + 1) =
+                   ((fun d -> (|>>) d (fun x -> x * 2)) << fun d -> (|>>) d (fun y -> y + 1)) data2
+printfn "Rule2: %A" rule2
+
+
