@@ -49,3 +49,17 @@
 
 ```
 
+5. 捕充 C#版
+``` csharp
+    // using static LanguageExt.Prelude; 
+    # c#
+    public static bool isValidHeight(int minHeight, int maxHeight, int height) => height >= minHeight && height <= maxHeight;
+
+    // 人類身高判斷器
+    public Func<int,bool> isValidHumanHeight = curry<int,int,int,bool>(isValidHeight)(80)(200);
+
+    // 狗狗高度判斷器
+    public Func<int,bool> isValidDogHeight = curry<int,int,int,bool>(isValidHeight)(30)(120);
+
+```
+
