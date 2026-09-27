@@ -61,10 +61,10 @@ for step in 1..training_steps do
 
     use g = Binding.tf.GradientTape()
     // Linear regression model
-    let pred = W * train_X + b
+    let mutable pred = W * train_X + b
 
     // Mean squared error
-    let loss = Binding.tf.reduce_mean (Binding.tf.square (pred - train_Y))
+    let mutable loss = Binding.tf.reduce_mean (Binding.tf.square (pred - train_Y))
 
     let gradients = g.gradient (loss, Seq.cast<IVariableV1> [ W; b ])
 
@@ -75,5 +75,8 @@ for step in 1..training_steps do
     )
 
     if step % display_step = 0 then
-        Binding.print ("Step: ", step, " Loss: ", loss, " W: ", W, " b: ", b)
+        // pred <- W * train_X + b
+        // loss <- Binding.tf.reduce_mean (Binding.tf.square (pred - train_Y))
+        //Binding.print ("Step: ", step, " Loss: ", loss, " W: ", W, " b: ", b)
+        Binding.print ("Step: ", step, " Loss: ", loss)
 //printfn "Step: %d, Loss: %O, W: %O, b: %O" step loss W b
