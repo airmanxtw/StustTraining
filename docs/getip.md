@@ -24,4 +24,15 @@ var ip = new[] { Page.Request }
                 .Select(IPProvider.getXFORWARDEDFOR)
                 .Select(IPProvider.getRealIP).First();
 
+
+var ip2 = new[] { Page.Request }
+         .Select(IPProvider.getXFORWARDEDFOR)
+         .Select(IPProvider.getRealIP);
+
+Func<string,string> getTitle = (string p) => string.Format("IP位置是:{0}",ip);
+
+var ip3 = ip2.Select(getTitle);
+
+Console.Write(ip3.First());
+
 ```
