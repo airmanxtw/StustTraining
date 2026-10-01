@@ -36,3 +36,13 @@ var ip3 = ip2.Select(getTitle);
 Console.Write(ip3.First());
 
 ```
+
+## Multiplication table
+```cs
+var table = from a in new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }
+            from b in new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 }
+            select string.Format("{0}x{1}={2}", a, b, a * b);
+
+table.ToList().ForEach(s => Console.Write(s));
+
+```
