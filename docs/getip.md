@@ -16,7 +16,7 @@ Dim ip3 = From req In {Page.Request}
 Console.Write(ip3.First())
 ```
 
-```csharp
+```cs
 /// c# 
 var ip = new[] { Page.Request }
                 .Select(IPProvider.getXFORWARDEDFOR)
