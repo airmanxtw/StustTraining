@@ -1,3 +1,4 @@
+## vb
 ```vb
 rem vb
 rem 巢狀
@@ -16,6 +17,7 @@ Dim ip3 = From req In {Page.Request}
 Console.Write(ip3.First())
 ```
 
+## c#
 ```cs
 /// c# 
 var ip = new[] { Page.Request }
