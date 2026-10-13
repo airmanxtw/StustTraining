@@ -9,6 +9,10 @@ printfn "x: %A" (x.data<int64>().ToArray())
 let y = x.reshape (3, 4)
 printfn "y: %A" y
 
+let t = y.T
+printfn "t: %A" t
+t.print ()
+
 let z = torch.randn 50
 printfn "z: %A" (z.data<float32>().ToArray())
 
