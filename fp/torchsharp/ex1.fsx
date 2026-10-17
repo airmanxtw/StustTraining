@@ -18,3 +18,6 @@ printfn "z: %A" (z.data<float32>().ToArray())
 
 let z2 = torch.randn 50
 printfn "z + z2: %A" ((z + z2).data<float32>().ToArray())
+
+let n1 = torch.normal (1, 0.5, [| 10L |], requires_grad = true)
+n1.print ()
