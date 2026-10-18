@@ -1,6 +1,8 @@
 #r "nuget: TorchSharp-cpu, 0.102.0"
+#r "nuget: Plotly.NET"
 
 open TorchSharp
+open Plotly.NET
 open type TorchSharp.torch
 
 let genData (w: torch.Tensor) b num_examples =
@@ -19,3 +21,14 @@ let n = 1000
 let X, y = genData w b n
 printfn "%A" X
 y.print ()
+
+
+let x1 = X.select(1L, 1L).data<double>().ToArray()
+
+let labels = y.data<double>().ToArray()
+
+Chart.Point(x = x1, y = labels, Name = "產生的資料")
+|> Chart.withTitle "x1 與 y 的關係"
+|> Chart.withXAxisStyle "x1"
+|> Chart.withYAxisStyle "y"
+|> Chart.show
